@@ -14,6 +14,7 @@ interface CareerOption {
   description: string;
   icon: React.ReactNode;
   countries: string[];
+  salaryRange: string;
 }
 
 export default function CareerChoicesSection() {
@@ -21,16 +22,15 @@ export default function CareerChoicesSection() {
 
   const careerOptions: CareerOption[] = [
     {
-      title: "Engineering & Technology",
+      title: "AI & Data Science",
       description:
-        "Pursue degrees in Computer Science, Mechanical, Electrical, and more at top global universities.",
+        "Master machine learning, neural networks, and big data analytics at world-leading tech institutes.",
       icon: (
         <svg
-          className="w-8 h-8 text-[#2C3C81]"
+          className="w-8 h-8 text-[#35B354]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             strokeLinecap="round"
@@ -40,41 +40,41 @@ export default function CareerChoicesSection() {
           />
         </svg>
       ),
-      countries: ["USA", "Germany", "Canada", "Japan"],
+      countries: ["USA", "Canada", "Germany", "Singapore"],
+      salaryRange: "$80K - $150K",
     },
     {
-      title: "Business & Management",
+      title: "Sustainable Energy",
       description:
-        "MBA and business degrees from world-renowned business schools and universities.",
+        "Pioneer renewable energy solutions with specialized programs in solar, wind, and green tech engineering.",
       icon: (
         <svg
-          className="w-8 h-8 text-[#2C3C81]"
+          className="w-8 h-8 text-[#35B354]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
           />
         </svg>
       ),
-      countries: ["UK", "USA", "France", "Australia"],
+      countries: ["Germany", "Netherlands", "Sweden", "Australia"],
+      salaryRange: "$65K - $120K",
     },
     {
-      title: "Medicine & Healthcare",
+      title: "Biotechnology",
       description:
-        "Study medicine, nursing, or public health at prestigious medical institutions worldwide.",
+        "Merge biology with technology through cutting-edge programs in genetic engineering and pharmaceutical sciences.",
       icon: (
         <svg
-          className="w-8 h-8 text-[#2C3C81]"
+          className="w-8 h-8 text-[#35B354]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             strokeLinecap="round"
@@ -84,42 +84,46 @@ export default function CareerChoicesSection() {
           />
         </svg>
       ),
-      countries: ["USA", "UK", "Australia", "Ireland"],
+      countries: ["USA", "Switzerland", "UK", "Japan"],
+      salaryRange: "$70K - $130K",
     },
     {
-      title: "Computer Science & AI",
+      title: "FinTech & Blockchain",
       description:
-        "Cutting-edge programs in artificial intelligence, data science, and software engineering.",
+        "Revolutionize finance with programs in cryptocurrency, algorithmic trading, and digital banking systems.",
       icon: (
         <svg
-          className="w-8 h-8 text-[#2C3C81]"
+          className="w-8 h-8 text-[#35B354]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
       ),
-      countries: ["USA", "Canada", "Germany", "Sweden"],
+      countries: ["UK", "USA", "UAE", "Hong Kong"],
+      salaryRange: "$90K - $160K",
     },
   ];
 
   return (
-    <section className="bg-gradient-to-br from-[#F5F4F5] via-[#B2ACCE]/20 to-[#F5F4F5] py-16 px-4">
-      <div className="container mx-auto">
+    <section className="bg-white py-16 md:py-24">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3C81] mb-4">
-            Find What&apos;s Right For You
+          <span className="inline-block bg-[#35B354]/10 text-[#35B354] px-4 py-2 rounded-full text-sm font-medium mb-4">
+            Future-Ready Careers
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Next Generation Career Paths
           </h2>
-          <p className="text-[#2C3C81]/80 max-w-2xl mx-auto text-lg">
-            Explore diverse career paths and find the perfect program to match
-            your aspirations.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover high-growth fields where global education meets emerging
+            market demands
           </p>
         </div>
 
@@ -129,49 +133,54 @@ export default function CareerChoicesSection() {
               swiperRef.current = swiper;
             }}
             modules={[Navigation, Pagination]}
-            spaceBetween={20}
+            spaceBetween={30}
             slidesPerView={1}
             breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-              },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
             }}
             pagination={{
               clickable: true,
-              el: ".swiper-pagination",
-              type: "bullets",
+              el: ".career-pagination",
+              bulletClass: "career-bullet",
+              bulletActiveClass: "career-bullet-active",
             }}
-            className="pb-12"
+            className="!pb-16"
           >
             {careerOptions.map((career, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden h-full border border-[#B2ACCE]/30 hover:shadow-xl transition-shadow duration-300">
-                  <div className="p-6 md:p-8 h-full flex flex-col">
-                    <div className="mb-4">{career.icon}</div>
-                    <h3 className="text-xl md:text-2xl font-bold text-[#2C3C81] mb-3">
+                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
+                  <div className="p-2 bg-[#35B354]/10 flex justify-center">
+                    {career.icon}
+                  </div>
+                  <div className="p-6 md:p-8 flex-grow">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
                       {career.title}
                     </h3>
-                    <p className="text-[#2C3C81]/80 mb-5 flex-grow">
-                      {career.description}
-                    </p>
-                    <div className="mt-auto">
-                      <div className="text-sm font-medium text-[#2C3C81] mb-2">
-                        Popular Destinations:
+                    <p className="text-gray-600 mb-6">{career.description}</p>
+
+                    <div className="mt-auto space-y-4">
+                      <div>
+                        <h4 className="text-sm font-semibold text-[#35B354] mb-2">
+                          TOP STUDY DESTINATIONS
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {career.countries.map((country, i) => (
+                            <span
+                              key={i}
+                              className="bg-[#35B354]/10 text-[#35B354] px-3 py-1 rounded-full text-xs"
+                            >
+                              {country}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex flex-wrap gap-2">
-                        {career.countries.map((country, i) => (
-                          <span
-                            key={i}
-                            className="bg-[#B2ACCE]/20 text-[#2C3C81] px-3 py-1 rounded-full text-xs"
-                          >
-                            {country}
-                          </span>
-                        ))}
+
+                      <div>
+                        <h4 className="text-sm font-semibold text-[#35B354] mb-1">
+                          AVERAGE SALARY
+                        </h4>
+                        <p className="font-medium">{career.salaryRange}</p>
                       </div>
                     </div>
                   </div>
@@ -180,21 +189,18 @@ export default function CareerChoicesSection() {
             ))}
           </Swiper>
 
-          {/* Custom Pagination */}
-          <div className="swiper-pagination !relative !bottom-0 mt-8 flex justify-center gap-2" />
+          <div className="career-pagination !bottom-0 mt-8 flex justify-center gap-2" />
         </div>
 
         <div className="text-center mt-12">
-          <button
-            type="button"
-            className="group flex items-center justify-center space-x-2 bg-[#C73D43] text-[#F5F4F5] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#2C3C81] hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-md mx-auto"
+          <Link
+            href="/career-assessment"
+            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#35B354] to-[#2a8a43] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 shadow-md"
           >
-            <Link href="/services">
-              <span>EXPLORE ALL CAREER OPTIONS</span>
-            </Link>
+            Take Our Career Aptitude Test
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 group-hover:translate-x-1 transition-transform"
+              className="h-5 w-5 ml-3 group-hover:translate-x-1 transition-transform"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -204,9 +210,24 @@ export default function CareerChoicesSection() {
                 clipRule="evenodd"
               />
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
+
+      <style jsx global>{`
+        .career-bullet {
+          width: 10px;
+          height: 10px;
+          background: #e5e7eb;
+          opacity: 1;
+          margin: 0 4px;
+        }
+        .career-bullet-active {
+          background: #35b354;
+          width: 24px;
+          border-radius: 4px;
+        }
+      `}</style>
     </section>
   );
 }

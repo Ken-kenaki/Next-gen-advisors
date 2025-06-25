@@ -45,13 +45,13 @@ export default function TextCarousel() {
     <div className="bg-[#F5F4F5] py-16 px-4">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-[#2C3C81] mb-4 md:mb-0">
+          <h2 className="text-3xl font-bold text-[#35B354] mb-4 md:mb-0">
             Explore News & Events
           </h2>
           <div className="flex items-center space-x-4">
             <button
               ref={navigationPrevRef}
-              className="p-2 rounded-full bg-[#2C3C81] text-[#F5F4F5] hover:bg-[#C73D43] transition-colors"
+              className="p-2 rounded-full bg-[#35B354] text-white hover:bg-[#2a8a43] transition-colors"
               aria-label="Previous slide"
               type="button"
             >
@@ -67,7 +67,7 @@ export default function TextCarousel() {
             </button>
             <button
               ref={navigationNextRef}
-              className="p-2 rounded-full bg-[#2C3C81] text-[#F5F4F5] hover:bg-[#C73D43] transition-colors"
+              className="p-2 rounded-full bg-[#35B354] text-white hover:bg-[#2a8a43] transition-colors"
               aria-label="Next slide"
               type="button"
             >
@@ -92,10 +92,13 @@ export default function TextCarousel() {
             prevEl: navigationPrevRef.current,
             nextEl: navigationNextRef.current,
           }}
-          pagination={{ clickable: true }}
+          pagination={{
+            clickable: true,
+            bulletClass: "swiper-pagination-bullet",
+            bulletActiveClass: "swiper-pagination-bullet-active !bg-[#35B354]",
+          }}
           autoplay={{ delay: 5000 }}
           onInit={(swiper) => {
-            // Type-safe navigation initialization
             if (navigationPrevRef.current && navigationNextRef.current) {
               // eslint-disable-next-line no-param-reassign
               swiper.params.navigation.prevEl = navigationPrevRef.current;
@@ -106,7 +109,6 @@ export default function TextCarousel() {
             }
           }}
           onSwiper={(swiper) => {
-            // Additional safety check after swiper initialization
             if (navigationPrevRef.current && navigationNextRef.current) {
               swiper.navigation.init();
               swiper.navigation.update();
@@ -116,11 +118,11 @@ export default function TextCarousel() {
         >
           {items.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-white p-8 rounded-lg shadow-md text-center max-w-3xl mx-auto">
-                <h3 className="text-2xl font-bold text-[#2C3C81] mb-4">
+              <div className="bg-white p-8 rounded-lg shadow-md text-center max-w-3xl mx-auto border-t-4 border-[#35B354]">
+                <h3 className="text-2xl font-bold text-[#35B354] mb-4">
                   {item.title}
                 </h3>
-                <p className="text-[#2C3C81]/80 text-lg">{item.description}</p>
+                <p className="text-gray-600 text-lg">{item.description}</p>
               </div>
             </SwiperSlide>
           ))}
@@ -129,7 +131,7 @@ export default function TextCarousel() {
         <div className="text-center mt-8">
           <Link
             href="/news-offer"
-            className="group inline-flex items-center bg-[#C73D43] text-[#F5F4F5] px-6 py-3 rounded-lg font-semibold hover:bg-[#2C3C81] transition-colors"
+            className="group inline-flex items-center bg-[#35B354] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#2a8a43] transition-colors"
           >
             View All Updates
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />

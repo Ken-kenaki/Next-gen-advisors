@@ -35,11 +35,11 @@ export default function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null);
 
   const destinations: Destination[] = [
-    { name: "South Korea", route: "/south-korea", flag: "🇰🇷" },
+    { name: "Canada", route: "canada", flag: "🇨🇦" },
     { name: "Australia", route: "/australia", flag: "🇦🇺" },
-    { name: "Japan", route: "/japan", flag: "🇯🇵" },
     { name: "UK", route: "/uk", flag: "🇬🇧" },
-    { name: "Malta", route: "/malta", flag: "🇲🇹" },
+    { name: "USA", route: "/usa", flag: "🇺🇸" },
+    { name: "New Zealand", route: "/new-zealand", flag: "🇳🇿" },
   ];
 
   const testPreparations: TestPreparation[] = [
@@ -201,29 +201,29 @@ export default function Navbar() {
           opacity: isVisible ? 1 : 0,
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="hidden lg:block bg-[#2C3C81] text-[#F5F4F5] py-2 px-4 text-sm fixed w-full z-50"
+        className="hidden lg:block bg-[#35B354] text-white py-2 px-4 text-sm fixed w-full z-50"
       >
-        <div className="container mx-auto flex justify-end items-center gap-4 md:gap-6">
-          <Link
-            href="/news-offer"
-            className="hover:text-[#B2ACCE] cursor-pointer transition-colors text-xs md:text-sm whitespace-nowrap"
-            aria-label="News and offers"
-          >
-            NEWS & OFFER
-          </Link>
+        <div className="container mx-auto flex justify-end items-center gap-6">
           <Link
             href="/gallery"
-            className="hover:text-[#B2ACCE] cursor-pointer transition-colors text-xs md:text-sm whitespace-nowrap"
+            className="hover:opacity-80 transition-opacity whitespace-nowrap"
             aria-label="Gallery"
           >
             GALLERY
           </Link>
           <Link
-            href="/login"
-            className="flex items-center gap-1 hover:text-[#B2ACCE] transition-colors text-xs md:text-sm whitespace-nowrap"
-            aria-label="Login"
+            href="/resources"
+            className="hover:opacity-80 transition-opacity whitespace-nowrap"
+            aria-label="Resources"
           >
-            <span>LOGIN</span>
+            RESOURCES
+          </Link>
+          <Link
+            href="/apply-online"
+            className="hover:opacity-80 transition-opacity whitespace-nowrap"
+            aria-label="Apply online"
+          >
+            APPLY ONLINE
           </Link>
         </div>
       </motion.div>
@@ -253,10 +253,10 @@ export default function Navbar() {
                 aria-label="Home"
               >
                 <Image
-                  alt="Gurukul education"
-                  width={82} // Default width (for mobile)
-                  height={82} // Default height (for mobile)
-                  className="w-16 md:w-20 lg:w-[82px]" // Responsive width classes
+                  alt="Company Logo"
+                  width={82}
+                  height={82}
+                  className="w-16 md:w-20 lg:w-[82px]"
                   src="/logo.png"
                 />
               </Link>
@@ -264,6 +264,16 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6">
+              <motion.div whileHover={{ scale: 1.05 }}>
+                <Link
+                  href="/about"
+                  className="text-gray-700 hover:text-[#35B354] font-medium transition-colors whitespace-nowrap"
+                  aria-label="About us"
+                >
+                  ABOUT US
+                </Link>
+              </motion.div>
+
               {/* Study Destinations Dropdown */}
               <div
                 className="relative"
@@ -272,12 +282,10 @@ export default function Navbar() {
               >
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center text-gray-700 hover:text-[#2C3C81] font-medium transition-colors py-4"
+                  className="flex items-center text-gray-700 hover:text-[#35B354] font-medium transition-colors py-4"
                   aria-label="Study destinations"
                 >
-                  <Link href="/countries" className="whitespace-nowrap">
-                    STUDY DESTINATIONS
-                  </Link>
+                  <span className="whitespace-nowrap">STUDY DESTINATIONS</span>
                   <motion.div
                     animate={{
                       rotate: activeDropdown === "destinations" ? 180 : 0,
@@ -295,9 +303,9 @@ export default function Navbar() {
                       initial="hidden"
                       animate="visible"
                       exit="exit"
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 w-72 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 py-4 z-50"
+                      className="absolute top-full left-0 w-64 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
                     >
-                      <div className="space-y-1 px-4">
+                      <div className="space-y-1">
                         {destinations.map((destination, index) => (
                           <motion.div
                             key={index}
@@ -307,16 +315,16 @@ export default function Navbar() {
                           >
                             <Link
                               href={destination.route}
-                              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#F5F4F5] transition-colors group"
+                              className="flex items-center gap-3 px-4 py-3 hover:bg-[#f5f5f5] transition-colors group"
                               aria-label={`Study in ${destination.name}`}
                             >
                               <span className="text-2xl">
                                 {destination.flag}
                               </span>
-                              <span className="text-sm font-medium text-gray-700 group-hover:text-[#2C3C81]">
+                              <span className="text-sm font-medium text-gray-700 group-hover:text-[#35B354]">
                                 {destination.name}
                               </span>
-                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#C73D43] group-hover:translate-x-1 transition-all ml-auto" />
+                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#35B354] group-hover:translate-x-1 transition-all ml-auto" />
                             </Link>
                           </motion.div>
                         ))}
@@ -326,16 +334,6 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <motion.div whileHover={{ scale: 1.05 }}>
-                <Link
-                  href="/universities"
-                  className="text-gray-700 hover:text-[#2C3C81] font-medium transition-colors whitespace-nowrap"
-                  aria-label="Universities"
-                >
-                  UNIVERSITIES
-                </Link>
-              </motion.div>
-
               {/* Test Preparations Dropdown */}
               <div
                 className="relative"
@@ -344,12 +342,10 @@ export default function Navbar() {
               >
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center text-gray-700 hover:text-[#2C3C81] font-medium transition-colors py-4"
+                  className="flex items-center text-gray-700 hover:text-[#35B354] font-medium transition-colors py-4"
                   aria-label="Test preparations"
                 >
-                  <Link href="/test-preparations" className="whitespace-nowrap">
-                    TEST PREPARATIONS
-                  </Link>
+                  <span className="whitespace-nowrap">TEST PREPARATION</span>
                   <motion.div
                     animate={{
                       rotate: activeDropdown === "testprep" ? 180 : 0,
@@ -367,9 +363,9 @@ export default function Navbar() {
                       initial="hidden"
                       animate="visible"
                       exit="exit"
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 w-72 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 py-4 z-50"
+                      className="absolute top-full left-0 w-64 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
                     >
-                      <div className="space-y-1 px-4">
+                      <div className="space-y-1">
                         {testPreparations.map((prep, index) => (
                           <motion.div
                             key={index}
@@ -379,14 +375,14 @@ export default function Navbar() {
                           >
                             <Link
                               href={prep.route}
-                              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#F5F4F5] transition-colors group"
+                              className="flex items-center gap-3 px-4 py-3 hover:bg-[#f5f5f5] transition-colors group"
                               aria-label={`${prep.name} test preparation`}
                             >
                               <span className="text-xl">{prep.icon}</span>
-                              <span className="text-sm font-medium text-gray-700 group-hover:text-[#2C3C81]">
+                              <span className="text-sm font-medium text-gray-700 group-hover:text-[#35B354]">
                                 {prep.name}
                               </span>
-                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#C73D43] group-hover:translate-x-1 transition-all ml-auto" />
+                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#35B354] group-hover:translate-x-1 transition-all ml-auto" />
                             </Link>
                           </motion.div>
                         ))}
@@ -396,17 +392,7 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
 
-              <motion.div whileHover={{ scale: 1.05 }}>
-                <Link
-                  href="/about"
-                  className="text-gray-700 hover:text-[#2C3C81] font-medium transition-colors whitespace-nowrap"
-                  aria-label="About us"
-                >
-                  ABOUT US
-                </Link>
-              </motion.div>
-
-              {/* Services Dropdown */}
+              {/* Our Services Dropdown */}
               <div
                 className="relative"
                 onMouseEnter={() => handleDropdownEnter("services")}
@@ -414,10 +400,10 @@ export default function Navbar() {
               >
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center text-gray-700 hover:text-[#2C3C81] font-medium transition-colors py-4 whitespace-nowrap"
-                  aria-label="Services"
+                  className="flex items-center text-gray-700 hover:text-[#35B354] font-medium transition-colors py-4 whitespace-nowrap"
+                  aria-label="Our services"
                 >
-                  SERVICES
+                  OUR SERVICES
                   <motion.div
                     animate={{
                       rotate: activeDropdown === "services" ? 180 : 0,
@@ -435,9 +421,9 @@ export default function Navbar() {
                       initial="hidden"
                       animate="visible"
                       exit="exit"
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 w-80 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 py-4 z-50"
+                      className="absolute top-full left-0 w-72 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
                     >
-                      <div className="space-y-1 px-4">
+                      <div className="space-y-1">
                         {services.map((service, index) => (
                           <motion.div
                             key={index}
@@ -447,14 +433,14 @@ export default function Navbar() {
                           >
                             <Link
                               href={service.route}
-                              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#F5F4F5] transition-colors group"
+                              className="flex items-center gap-3 px-4 py-3 hover:bg-[#f5f5f5] transition-colors group"
                               aria-label={service.name}
                             >
                               <span className="text-xl">{service.icon}</span>
-                              <span className="text-sm font-medium text-gray-700 group-hover:text-[#2C3C81] flex-1">
+                              <span className="text-sm font-medium text-gray-700 group-hover:text-[#35B354] flex-1">
                                 {service.name}
                               </span>
-                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#C73D43] group-hover:translate-x-1 transition-all" />
+                              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#35B354] group-hover:translate-x-1 transition-all" />
                             </Link>
                           </motion.div>
                         ))}
@@ -466,8 +452,18 @@ export default function Navbar() {
 
               <motion.div whileHover={{ scale: 1.05 }}>
                 <Link
+                  href="/events-news"
+                  className="text-gray-700 hover:text-[#35B354] font-medium transition-colors whitespace-nowrap"
+                  aria-label="Events and news"
+                >
+                  EVENTS/NEWS
+                </Link>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.05 }}>
+                <Link
                   href="/blog"
-                  className="text-gray-700 hover:text-[#2C3C81] font-medium transition-colors whitespace-nowrap"
+                  className="text-gray-700 hover:text-[#35B354] font-medium transition-colors whitespace-nowrap"
                   aria-label="Blog"
                 >
                   BLOG
@@ -480,10 +476,10 @@ export default function Navbar() {
               >
                 <Link
                   href="/contact"
-                  className="bg-[#C73D43] text-[#F5F4F5] px-4 xl:px-6 py-2 rounded font-medium hover:bg-[#B2ACCE] hover:text-[#2C3C81] transition-all duration-300 whitespace-nowrap"
-                  aria-label="Get consultation"
+                  className="bg-[#35B354] text-white px-4 xl:px-6 py-2 rounded font-medium hover:bg-[#2a8e43] transition-all duration-300 whitespace-nowrap"
+                  aria-label="Contact us"
                 >
-                  GET CONSULTATION
+                  CONTACT US
                 </Link>
               </motion.div>
             </div>
@@ -564,43 +560,48 @@ export default function Navbar() {
                     {/* Mobile Top Nav Items */}
                     <div className="border-b pb-4 space-y-2">
                       <Link
-                        href="/news-offer"
-                        className="block py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors"
-                        onClick={() => setIsOpen(false)}
-                        aria-label="News and offers"
-                      >
-                        NEWS & OFFER
-                      </Link>
-                      <Link
                         href="/gallery"
-                        className="block py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors"
+                        className="block py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors"
                         onClick={() => setIsOpen(false)}
                         aria-label="Gallery"
                       >
                         GALLERY
                       </Link>
                       <Link
-                        href="/login"
-                        className="block py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors"
+                        href="/resources"
+                        className="block py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors"
                         onClick={() => setIsOpen(false)}
-                        aria-label="Login"
+                        aria-label="Resources"
                       >
-                        LOGIN
+                        RESOURCES
+                      </Link>
+                      <Link
+                        href="/apply-online"
+                        className="block py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors"
+                        onClick={() => setIsOpen(false)}
+                        aria-label="Apply online"
+                      >
+                        APPLY ONLINE
                       </Link>
                     </div>
 
                     {/* Mobile Main Nav Items */}
                     <div className="space-y-4">
+                      <Link
+                        href="/about"
+                        className="block py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors border-b"
+                        onClick={() => setIsOpen(false)}
+                        aria-label="About us"
+                      >
+                        ABOUT US
+                      </Link>
+
                       {/* Study Destinations Mobile Dropdown */}
                       <div className="border-b pb-2">
                         <div className="flex items-center justify-between w-full">
-                          <Link
-                            href="/countries"
-                            className="py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors"
-                            onClick={() => setIsOpen(false)}
-                          >
+                          <span className="py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors">
                             STUDY DESTINATIONS
-                          </Link>
+                          </span>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
@@ -634,7 +635,7 @@ export default function Navbar() {
                                   <Link
                                     key={index}
                                     href={destination.route}
-                                    className="flex items-center gap-3 py-2 text-gray-700 hover:text-[#2C3C81] transition-colors"
+                                    className="flex items-center gap-3 py-2 text-gray-700 hover:text-[#35B354] transition-colors"
                                     onClick={() => setIsOpen(false)}
                                     aria-label={`Study in ${destination.name}`}
                                   >
@@ -650,31 +651,18 @@ export default function Navbar() {
                         </AnimatePresence>
                       </div>
 
-                      <Link
-                        href="/universities"
-                        className="block py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors border-b"
-                        onClick={() => setIsOpen(false)}
-                        aria-label="Universities"
-                      >
-                        UNIVERSITIES
-                      </Link>
-
-                      {/* Test Preparations Mobile Dropdown */}
+                      {/* Test Preparation Mobile Dropdown */}
                       <div className="border-b pb-2">
                         <div className="flex items-center justify-between w-full">
-                          <Link
-                            href="/test-preparations"
-                            className="py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors"
-                            onClick={() => setIsOpen(false)}
-                          >
-                            TEST PREPARATIONS
-                          </Link>
+                          <span className="py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors">
+                            TEST PREPARATION
+                          </span>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               toggleMobileDropdown("testprep");
                             }}
-                            aria-label="Toggle test preparations dropdown"
+                            aria-label="Toggle test preparation dropdown"
                             className="p-2"
                           >
                             <motion.div
@@ -701,7 +689,7 @@ export default function Navbar() {
                                   <Link
                                     key={index}
                                     href={prep.route}
-                                    className="flex items-center gap-3 py-2 text-gray-700 hover:text-[#2C3C81] transition-colors"
+                                    className="flex items-center gap-3 py-2 text-gray-700 hover:text-[#35B354] transition-colors"
                                     onClick={() => setIsOpen(false)}
                                     aria-label={`${prep.name} test preparation`}
                                   >
@@ -715,25 +703,12 @@ export default function Navbar() {
                         </AnimatePresence>
                       </div>
 
-                      <Link
-                        href="/about"
-                        className="block py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors border-b"
-                        onClick={() => setIsOpen(false)}
-                        aria-label="About us"
-                      >
-                        ABOUT US
-                      </Link>
-
-                      {/* Services Mobile Dropdown */}
+                      {/* Our Services Mobile Dropdown */}
                       <div className="border-b pb-2">
                         <div className="flex items-center justify-between w-full">
-                          <Link
-                            href="/services"
-                            className="py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors"
-                            onClick={() => setIsOpen(false)}
-                          >
-                            SERVICES
-                          </Link>
+                          <span className="py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors">
+                            OUR SERVICES
+                          </span>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
@@ -766,7 +741,7 @@ export default function Navbar() {
                                   <Link
                                     key={index}
                                     href={service.route}
-                                    className="flex items-center gap-3 py-2 text-gray-700 hover:text-[#2C3C81] transition-colors"
+                                    className="flex items-center gap-3 py-2 text-gray-700 hover:text-[#35B354] transition-colors"
                                     onClick={() => setIsOpen(false)}
                                     aria-label={service.name}
                                   >
@@ -783,8 +758,17 @@ export default function Navbar() {
                       </div>
 
                       <Link
+                        href="/events-news"
+                        className="block py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors border-b"
+                        onClick={() => setIsOpen(false)}
+                        aria-label="Events and news"
+                      >
+                        EVENTS/NEWS
+                      </Link>
+
+                      <Link
                         href="/blog"
-                        className="block py-2 text-gray-700 hover:text-[#2C3C81] font-medium transition-colors border-b"
+                        className="block py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors border-b"
                         onClick={() => setIsOpen(false)}
                         aria-label="Blog"
                       >
@@ -798,11 +782,11 @@ export default function Navbar() {
                     >
                       <Link
                         href="/contact"
-                        className="w-full bg-[#C73D43] text-[#F5F4F5] px-6 py-3 rounded font-medium hover:bg-[#B2ACCE] hover:text-[#2C3C81] transition-all duration-300 text-center block"
+                        className="w-full bg-[#35B354] text-white px-6 py-3 rounded font-medium hover:bg-[#2a8e43] transition-all duration-300 text-center block"
                         onClick={() => setIsOpen(false)}
-                        aria-label="Get consultation"
+                        aria-label="Contact us"
                       >
-                        GET CONSULTATION
+                        CONTACT US
                       </Link>
                     </motion.div>
                   </motion.div>

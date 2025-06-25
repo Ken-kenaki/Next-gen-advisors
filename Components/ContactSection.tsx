@@ -49,18 +49,8 @@ export default function ContactSection() {
     setError("");
 
     try {
-      const response = await fetch("/api/forms", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to submit form");
-      }
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       setShowSuccess(true);
       setFormData({
@@ -72,10 +62,7 @@ export default function ContactSection() {
       });
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (err) {
-      console.error("Form submission error:", err);
-      setError(
-        err instanceof Error ? err.message : "An unknown error occurred"
-      );
+      setError("Failed to submit form. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -85,20 +72,20 @@ export default function ContactSection() {
     {
       icon: Phone,
       title: "Phone",
-      details: "+977-9844162726",
-      link: "tel:+9779844162726",
+      details: "+977 015413555 | 9709195734 | 9709195735",
+      link: "tel:+977015413555",
     },
     {
       icon: Mail,
       title: "Email",
-      details: "info@gurukuleducation.com",
-      link: "mailto:info@gurukuleducation.com",
+      details: "nextgenadvisors7@gmail.com",
+      link: "mailto:nextgenadvisors7@gmail.com",
     },
     {
       icon: MapPin,
       title: "Address",
-      details: "Kathmandu, Nepal",
-      link: "#",
+      details: "Manbhawan, Lalitpur, Nepal",
+      link: "https://maps.google.com",
     },
     {
       icon: Clock,
@@ -109,42 +96,43 @@ export default function ContactSection() {
   ];
 
   return (
-    <section className="bg-[#F5F4F5] py-12 sm:py-16 px-4 sm:px-6">
+    <section className="bg-gray-50 py-16 px-4 sm:px-6">
       {/* Success Popup */}
       {showSuccess && (
-        <div
-          className="fixed top-4 right-4 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-bounce"
-          style={{ backgroundColor: "#2C3C81" }}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed top-4 right-4 bg-[#35B354] text-white px-6 py-3 rounded-lg shadow-lg z-50"
         >
           Your message has been sent successfully! We'll contact you soon.
-        </div>
+        </motion.div>
       )}
 
       {/* Error Message */}
       {error && (
-        <div
-          className="fixed top-4 right-4 text-white px-6 py-3 rounded-lg shadow-lg z-50"
-          style={{ backgroundColor: "#C73D43" }}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50"
         >
           {error}
-        </div>
+        </motion.div>
       )}
 
-      <div className="container mx-auto max-w-7xl">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2C3C81] mb-3 sm:mb-4">
-            Get In Touch
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#35B354] mb-4">
+            Contact Nextgen Advisors
           </h2>
-          <p className="text-base sm:text-lg text-[#2C3C81]/80 max-w-2xl mx-auto">
-            Ready to start your international education journey? Contact us
-            today for a free consultation.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Have questions about studying abroad? Reach out to our expert team
+            for personalized guidance.
           </p>
         </motion.div>
 
@@ -154,42 +142,37 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="space-y-6 sm:space-y-8"
+            className="space-y-8"
           >
-            <div>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#2C3C81] mb-4 sm:mb-6">
-                Contact Information
+            <div className="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                Our Contact Details
               </h3>
-              <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-start gap-3 sm:gap-4"
+                    className="flex items-start gap-4"
                   >
-                    <div className="bg-[#C73D43] rounded-full p-2 sm:p-3 flex-shrink-0">
-                      <info.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                    <div className="bg-[#35B354]/10 rounded-full p-3 flex-shrink-0">
+                      <info.icon className="w-5 h-5 text-[#35B354]" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-[#2C3C81] mb-1">
+                      <h4 className="font-semibold text-gray-700 mb-1">
                         {info.title}
                       </h4>
                       {info.link !== "#" ? (
                         <a
                           href={info.link}
-                          className="text-sm sm:text-base text-[#2C3C81]/80 hover:text-[#C73D43] transition-colors"
-                          aria-label={`Contact via ${info.title}`}
+                          className="text-gray-600 hover:text-[#35B354] transition-colors"
                         >
                           {info.details}
                         </a>
                       ) : (
-                        <p className="text-sm sm:text-base text-[#2C3C81]/80">
-                          {info.details}
-                        </p>
+                        <p className="text-gray-600">{info.details}</p>
                       )}
                     </div>
                   </motion.div>
@@ -197,31 +180,33 @@ export default function ContactSection() {
               </div>
             </div>
 
-            {/* Quick Contact */}
+            {/* Social Media */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="bg-[#2C3C81] rounded-xl p-4 sm:p-6 text-white"
+              className="bg-[#35B354]/5 p-6 rounded-xl border border-[#35B354]/10"
             >
-              <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
-                Need Immediate Help?
+              <h4 className="text-xl font-bold text-gray-800 mb-4">
+                Connect With Us
               </h4>
-              <p className="text-sm sm:text-base mb-4 opacity-90">
-                Call us directly for urgent inquiries or to schedule an
-                immediate consultation.
+              <p className="text-gray-600 mb-4">
+                Follow us on social media for updates and study abroad tips.
               </p>
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href="tel:+9779844162726"
-                className="inline-flex items-center bg-[#C73D43] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-white hover:text-[#2C3C81] transition-colors text-sm sm:text-base"
-                aria-label="Call us now"
-              >
-                <Phone className="w-4 h-4 mr-2" />
-                Call Now
-              </motion.a>
+              <div className="flex gap-4">
+                {["Facebook", "Instagram", "TikTok"].map((platform, index) => (
+                  <motion.a
+                    key={index}
+                    whileHover={{ y: -2 }}
+                    href="#"
+                    className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-all"
+                  >
+                    <span className="font-medium text-[#35B354]">
+                      {platform}
+                    </span>
+                  </motion.a>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
 
@@ -230,18 +215,17 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-100px" }}
             className="bg-white rounded-xl shadow-lg p-6 sm:p-8"
           >
-            <h3 className="text-xl sm:text-2xl font-bold text-[#2C3C81] mb-4 sm:mb-6">
-              Send us a Message
+            <h3 className="text-2xl font-bold text-gray-800 mb-6">
+              Send Us a Message
             </h3>
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-[#2C3C81] mb-1 sm:mb-2"
+                    className="block text-sm font-medium text-gray-700 mb-2"
                   >
                     Full Name *
                   </label>
@@ -252,14 +236,14 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-[#B2ACCE]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C73D43] focus:border-transparent transition-all text-sm sm:text-base"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#35B354] focus:border-transparent transition-all"
                     placeholder="Your full name"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-[#2C3C81] mb-1 sm:mb-2"
+                    className="block text-sm font-medium text-gray-700 mb-2"
                   >
                     Email *
                   </label>
@@ -270,17 +254,17 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-[#B2ACCE]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C73D43] focus:border-transparent transition-all text-sm sm:text-base"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#35B354] focus:border-transparent transition-all"
                     placeholder="your.email@example.com"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label
                     htmlFor="phone"
-                    className="block text-sm font-medium text-[#2C3C81] mb-1 sm:mb-2"
+                    className="block text-sm font-medium text-gray-700 mb-2"
                   >
                     Phone *
                   </label>
@@ -291,14 +275,14 @@ export default function ContactSection() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-[#B2ACCE]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C73D43] focus:border-transparent transition-all text-sm sm:text-base"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#35B354] focus:border-transparent transition-all"
                     placeholder="Your phone number"
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-medium text-[#2C3C81] mb-1 sm:mb-2"
+                    className="block text-sm font-medium text-gray-700 mb-2"
                   >
                     Subject *
                   </label>
@@ -308,10 +292,9 @@ export default function ContactSection() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-[#B2ACCE]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C73D43] focus:border-transparent transition-all text-sm sm:text-base"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#35B354] focus:border-transparent transition-all"
                   >
                     <option value="">Select a subject</option>
-                    <option value="General Inquiry">General Inquiry</option>
                     <option value="Study Abroad Consultation">
                       Study Abroad Consultation
                     </option>
@@ -320,6 +303,7 @@ export default function ContactSection() {
                     <option value="Scholarship Information">
                       Scholarship Information
                     </option>
+                    <option value="Other Inquiry">Other Inquiry</option>
                   </select>
                 </div>
               </div>
@@ -327,7 +311,7 @@ export default function ContactSection() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-[#2C3C81] mb-1 sm:mb-2"
+                  className="block text-sm font-medium text-gray-700 mb-2"
                 >
                   Message *
                 </label>
@@ -338,7 +322,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-[#B2ACCE]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C73D43] focus:border-transparent transition-all text-sm sm:text-base"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#35B354] focus:border-transparent transition-all"
                   placeholder="Tell us about your study abroad goals..."
                 />
               </div>
@@ -348,8 +332,7 @@ export default function ContactSection() {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#C73D43] text-white py-3 sm:py-4 px-6 rounded-lg font-semibold hover:bg-[#2C3C81] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm sm:text-base"
-                aria-label="Submit contact form"
+                className="w-full bg-[#35B354] text-white py-4 px-6 rounded-lg font-semibold hover:bg-[#2a8f44] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
@@ -378,7 +361,7 @@ export default function ContactSection() {
                 ) : (
                   <>
                     Send Message
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-5 h-5" />
                   </>
                 )}
               </motion.button>

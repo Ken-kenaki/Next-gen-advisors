@@ -10,26 +10,24 @@ interface FeatureItem {
   title: string;
   description: string;
   image: string;
-  imagePosition: "left" | "right";
+  badge?: string;
   buttonText: string;
   buttonLink: string;
 }
 
 export default function WhyUs() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            gsap.from(entry.target.querySelectorAll(".animate-item"), {
+            gsap.from(entry.target, {
               y: 50,
               opacity: 0,
               duration: 0.8,
-              stagger: 0.2,
               ease: "power3.out",
             });
             observer.unobserve(entry.target);
@@ -40,8 +38,8 @@ export default function WhyUs() {
     );
 
     if (sectionRef.current) {
-      const sections = sectionRef.current.querySelectorAll(".why-us-section");
-      sections.forEach((section) => observer.observe(section));
+      const cards = sectionRef.current.querySelectorAll(".feature-card");
+      cards.forEach((card) => observer.observe(card));
     }
 
     return () => observer.disconnect();
@@ -49,92 +47,100 @@ export default function WhyUs() {
 
   const features: FeatureItem[] = [
     {
-      title: "Decades of Expertise",
+      title: "AI-Powered University Matching",
       description:
-        "With over 20 years in international education, our counselors have successfully guided thousands of students to their dream universities worldwide.",
-      image: "/why-us-1.jpeg",
-      imagePosition: "left",
-      buttonText: "MEET OUR TEAM",
-      buttonLink: "/about", // Updated link to /about route
+        "Our proprietary algorithm analyzes your profile against thousands of data points to recommend perfect-fit universities with 92% acceptance rates.",
+      image: "/ai-matching.jpg",
+      badge: "Innovation",
+      buttonText: "Try Our Match Tool",
+      buttonLink: "/match",
     },
     {
-      title: "Personalized Approach",
+      title: "Digital-First Advisory",
       description:
-        "Every student receives a customized roadmap tailored to their academic background, career goals, and personal aspirations.",
-      image: "/why-us-2.jpeg",
-      imagePosition: "right",
-      buttonText: "SEE SUCCESS STORIES",
-      buttonLink: "/#stories", // Updated link to #stories anchor
+        "Virtual consultations, real-time document tracking, and 24/7 chatbot support - experience seamless guidance through our Next Gen platform.",
+      image: "/digital-advisory.jpg",
+      badge: "Convenience",
+      buttonText: "Explore Platform",
+      buttonLink: "/platform",
     },
     {
-      title: "End-to-End Support",
+      title: "Global Success Network",
       description:
-        "From test preparation to visa approval and post-arrival assistance, we're with you at every step of your journey.",
-      image: "/why-us-3.jpeg",
-      imagePosition: "left",
-      buttonText: "VIEW OUR SERVICES",
-      buttonLink: "/services", // Updated link to /services route
+        "Join 10,000+ alumni across 30 countries who provide insider tips and mentorship through our exclusive student community.",
+      image: "/global-network.jpg",
+      badge: "Community",
+      buttonText: "Meet Our Alumni",
+      buttonLink: "/alumni",
     },
   ];
 
   return (
-    <div ref={sectionRef} className="bg-[#F5F4F5] py-16 md:py-24">
+    <div className="bg-white py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3C81] mb-4 animate-item">
-            Why Choose Us?
+          <span className="inline-block bg-[#35B354]/10 text-[#35B354] px-4 py-2 rounded-full text-sm font-medium mb-4">
+            The Next Gen Difference
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Why Next Gen Advisors?
           </h2>
-          <div className="w-20 h-1 bg-[#C73D43] mx-auto animate-item"></div>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Transforming international education with technology, transparency,
+            and tailored solutions.
+          </p>
         </div>
 
-        {features.map((feature, index) => (
-          <div
-            key={index}
-            className={`why-us-section mb-24 last:mb-0 flex flex-col ${
-              feature.imagePosition === "right"
-                ? "lg:flex-row-reverse"
-                : "lg:flex-row"
-            } items-center gap-8 lg:gap-12`}
-          >
-            {/* Image Section */}
+        <div
+          ref={sectionRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {features.map((feature, index) => (
             <div
-              ref={(el) => (imageRefs.current[index] = el)}
-              className={`w-full lg:w-1/2 h-80 md:h-96 relative rounded-xl overflow-hidden shadow-xl animate-item`}
+              key={index}
+              ref={(el) => (cardRefs.current[index] = el)}
+              className="feature-card group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
             >
-              <Image
-                src={feature.image}
-                alt={feature.title}
-                fill
-                className="object-cover"
-                quality={100}
-                priority={index === 0} // Only prioritize first image
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              <div className="relative h-60">
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  fill
+                  className="object-cover"
+                  quality={100}
+                />
+                {feature.badge && (
+                  <span className="absolute top-4 right-4 bg-[#35B354] text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    {feature.badge}
+                  </span>
+                )}
+              </div>
+              <div className="p-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 mb-6">{feature.description}</p>
+                <Link
+                  href={feature.buttonLink}
+                  className="inline-flex items-center text-[#35B354] font-semibold group-hover:text-[#2a8a43] transition-colors"
+                >
+                  <span>{feature.buttonText}</span>
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
+          ))}
+        </div>
 
-            {/* Content Section */}
-            <div
-              ref={(el) => (contentRefs.current[index] = el)}
-              className={`w-full lg:w-1/2 space-y-6 animate-item ${
-                feature.imagePosition === "right" ? "lg:pr-8" : "lg:pl-8"
-              }`}
-            >
-              <h3 className="text-2xl md:text-3xl font-bold text-[#2C3C81]">
-                {feature.title}
-              </h3>
-              <p className="text-[#2C3C81]/80 text-lg leading-relaxed">
-                {feature.description}
-              </p>
-              <Link
-                href={feature.buttonLink}
-                className="group inline-flex items-center bg-[#C73D43] text-[#F5F4F5] px-6 py-3 rounded-lg font-semibold hover:bg-[#2C3C81] hover:shadow-lg transition-all duration-300 shadow-md"
-              >
-                <span>{feature.buttonText}</span>
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </div>
-        ))}
+        <div className="mt-16 text-center">
+          <Link
+            href="/about"
+            className="inline-flex items-center justify-center px-8 py-4 bg-[#35B354] text-white font-semibold rounded-lg hover:bg-[#2a8a43] transition-colors shadow-md hover:shadow-lg"
+          >
+            Discover Our Full Approach
+            <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
       </div>
     </div>
   );

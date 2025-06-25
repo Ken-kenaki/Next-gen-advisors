@@ -65,42 +65,42 @@ export default function StatsCounter() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#2C3C81] text-[#F5F4F5] py-16 md:py-20 px-4"
+      className="bg-[#35B354] text-white py-20 md:py-24 px-4"
       aria-label="Our achievements"
     >
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 lg:gap-24">
+      <div className="container mx-auto max-w-6xl">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-12 md:gap-8 lg:gap-12">
           {/* Students Counter */}
-          <div className="text-center">
+          <div className="text-center px-4 py-6 rounded-lg bg-white/10 backdrop-blur-sm w-full max-w-xs">
             <div
               ref={studentRef}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2"
+              className="text-5xl sm:text-6xl md:text-7xl font-bold mb-3"
             >
               0+
             </div>
-            <div className="text-lg md:text-xl lg:text-2xl">Students</div>
+            <div className="text-xl md:text-2xl font-medium">Students</div>
           </div>
 
           {/* Universities Counter */}
-          <div className="text-center">
+          <div className="text-center px-4 py-6 rounded-lg bg-white/10 backdrop-blur-sm w-full max-w-xs">
             <div
               ref={universityRef}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2"
+              className="text-5xl sm:text-6xl md:text-7xl font-bold mb-3"
             >
               0+
             </div>
-            <div className="text-lg md:text-xl lg:text-2xl">Universities</div>
+            <div className="text-xl md:text-2xl font-medium">Universities</div>
           </div>
 
           {/* Countries Counter */}
-          <div className="text-center">
+          <div className="text-center px-4 py-6 rounded-lg bg-white/10 backdrop-blur-sm w-full max-w-xs">
             <div
               ref={countryRef}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2"
+              className="text-5xl sm:text-6xl md:text-7xl font-bold mb-3"
             >
               0+
             </div>
-            <div className="text-lg md:text-xl lg:text-2xl">Countries</div>
+            <div className="text-xl md:text-2xl font-medium">Countries</div>
           </div>
         </div>
       </div>
