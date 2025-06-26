@@ -35,30 +35,27 @@ export default function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null);
 
   const destinations: Destination[] = [
-    { name: "Canada", route: "canada", flag: "🇨🇦" },
-    { name: "Australia", route: "/australia", flag: "🇦🇺" },
-    { name: "UK", route: "/uk", flag: "🇬🇧" },
-    { name: "USA", route: "/usa", flag: "🇺🇸" },
-    { name: "New Zealand", route: "/new-zealand", flag: "🇳🇿" },
+    { name: "Canada", route: "/study-destinations/canada", flag: "🇨🇦" },
+    { name: "Australia", route: "/study-destinations/australia", flag: "🇦🇺" },
+    { name: "UK", route: "/study-destinations/uk", flag: "🇬🇧" },
+    { name: "USA", route: "/study-destinations/usa", flag: "🇺🇸" },
+    {
+      name: "New Zealand",
+      route: "/study-destinations/new-zealand",
+      flag: "🇳🇿",
+    },
   ];
 
   const testPreparations: TestPreparation[] = [
     {
       name: "IELTS Preparation",
-      route: "/test-preparations/ielts",
+      route: "/test-preparation/ielts",
       icon: "📝",
     },
-    { name: "PTE Preparation", route: "/test-preparations/pte", icon: "💻" },
-    {
-      name: "Japanese Language",
-      route: "/test-preparations/japanese-language",
-      icon: "🇯🇵",
-    },
-    {
-      name: "Korean Language",
-      route: "/test-preparations/korean-language",
-      icon: "🇰🇷",
-    },
+    { name: "PTE Preparation", route: "/test-preparation/pte", icon: "💻" },
+    { name: "GRE/ GMAT", route: "/test-preparation/gre", icon: "🧠" },
+    { name: "TOEFL", route: "/test-preparation/toefl", icon: "🇺🇸" },
+    { name: "SAT", route: "/test-preparation/sat", icon: "📚" },
   ];
 
   const services: Service[] = [
@@ -149,7 +146,7 @@ export default function Navbar() {
 
   const mobileMenuVariants = {
     hidden: {
-      x: "100%",
+      x: "-100%",
       transition: {
         duration: 0.3,
         ease: "easeInOut",
@@ -252,13 +249,6 @@ export default function Navbar() {
                 className="text-2xl md:text-3xl font-bold"
                 aria-label="Home"
               >
-                {/* <Image
-                  alt="Company Logo"
-                  width={82}
-                  height={82}
-                  className="w-16 md:w-20 lg:w-[82px]"
-                  src="/"
-                /> */}
                 Logo
               </Link>
             </motion.div>
@@ -281,21 +271,25 @@ export default function Navbar() {
                 onMouseEnter={() => handleDropdownEnter("destinations")}
                 onMouseLeave={handleDropdownLeave}
               >
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center text-gray-700 hover:text-[#35B354] font-medium transition-colors py-4"
-                  aria-label="Study destinations"
-                >
-                  <span className="whitespace-nowrap">STUDY DESTINATIONS</span>
-                  <motion.div
-                    animate={{
-                      rotate: activeDropdown === "destinations" ? 180 : 0,
-                    }}
-                    transition={{ duration: 0.2 }}
+                <Link href="/study-destinations" passHref>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center text-gray-700 hover:text-[#35B354] font-medium transition-colors py-4"
+                    aria-label="Study destinations"
                   >
-                    <ChevronDown className="ml-1 w-4 h-4" />
-                  </motion.div>
-                </motion.button>
+                    <span className="whitespace-nowrap">
+                      STUDY DESTINATIONS
+                    </span>
+                    <motion.div
+                      animate={{
+                        rotate: activeDropdown === "destinations" ? 180 : 0,
+                      }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="ml-1 w-4 h-4" />
+                    </motion.div>
+                  </motion.button>
+                </Link>
 
                 <AnimatePresence>
                   {activeDropdown === "destinations" && (
@@ -341,21 +335,23 @@ export default function Navbar() {
                 onMouseEnter={() => handleDropdownEnter("testprep")}
                 onMouseLeave={handleDropdownLeave}
               >
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center text-gray-700 hover:text-[#35B354] font-medium transition-colors py-4"
-                  aria-label="Test preparations"
-                >
-                  <span className="whitespace-nowrap">TEST PREPARATION</span>
-                  <motion.div
-                    animate={{
-                      rotate: activeDropdown === "testprep" ? 180 : 0,
-                    }}
-                    transition={{ duration: 0.2 }}
+                <Link href="/test-preparation" passHref>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    className="flex items-center text-gray-700 hover:text-[#35B354] font-medium transition-colors py-4"
+                    aria-label="Test preparations"
                   >
-                    <ChevronDown className="ml-1 w-4 h-4" />
-                  </motion.div>
-                </motion.button>
+                    <span className="whitespace-nowrap">TEST PREPARATION</span>
+                    <motion.div
+                      animate={{
+                        rotate: activeDropdown === "testprep" ? 180 : 0,
+                      }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="ml-1 w-4 h-4" />
+                    </motion.div>
+                  </motion.button>
+                </Link>
 
                 <AnimatePresence>
                   {activeDropdown === "testprep" && (
@@ -530,7 +526,7 @@ export default function Navbar() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="lg:hidden fixed inset-0 z-40"
+                className="lg:hidden fixed inset-0 z-40 bg-black bg-opacity-50"
                 onClick={() => setIsOpen(false)}
               />
               <motion.div
@@ -539,7 +535,7 @@ export default function Navbar() {
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
-                className="lg:hidden fixed top-0 right-0 w-full max-w-xs bg-white h-screen z-50 shadow-xl overflow-y-auto"
+                className="lg:hidden fixed top-0 left-0 w-full max-w-xs bg-white h-screen z-50 shadow-xl overflow-y-auto"
               >
                 <div className="p-6">
                   <motion.button
@@ -600,11 +596,16 @@ export default function Navbar() {
                       {/* Study Destinations Mobile Dropdown */}
                       <div className="border-b pb-2">
                         <div className="flex items-center justify-between w-full">
-                          <span className="py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors">
+                          <Link
+                            href="/study-destinations"
+                            className="py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors"
+                            onClick={() => setIsOpen(false)}
+                          >
                             STUDY DESTINATIONS
-                          </span>
+                          </Link>
                           <button
                             onClick={(e) => {
+                              e.preventDefault();
                               e.stopPropagation();
                               toggleMobileDropdown("destinations");
                             }}
@@ -655,11 +656,16 @@ export default function Navbar() {
                       {/* Test Preparation Mobile Dropdown */}
                       <div className="border-b pb-2">
                         <div className="flex items-center justify-between w-full">
-                          <span className="py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors">
+                          <Link
+                            href="/test-preparation"
+                            className="py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors"
+                            onClick={() => setIsOpen(false)}
+                          >
                             TEST PREPARATION
-                          </span>
+                          </Link>
                           <button
                             onClick={(e) => {
+                              e.preventDefault();
                               e.stopPropagation();
                               toggleMobileDropdown("testprep");
                             }}
