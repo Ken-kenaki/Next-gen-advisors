@@ -9,7 +9,7 @@ import StudentSuccessCarousel from "@/Components/StudentSuccess";
 import CountriesCarousel from "@/Components/Countries";
 import AboutSection from "@/Components/About";
 import ContactSection from "@/Components/ContactSection";
-import FindUsSection from "@/Components/FindUs";
+// import FindUsSection from "@/Components/FindUs";
 
 export default async function page() {
   return (
@@ -25,7 +25,7 @@ export default async function page() {
         <StudentSuccessCarousel />
         <CountriesCarousel />
         <ContactSection />
-        <FindUsSection />
+        {/* <FindUsSection /> */}
       </div>
     </main>
   );
