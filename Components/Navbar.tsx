@@ -252,13 +252,14 @@ export default function Navbar() {
                 className="text-2xl md:text-3xl font-bold"
                 aria-label="Home"
               >
-                <Image
+                {/* <Image
                   alt="Company Logo"
                   width={82}
                   height={82}
                   className="w-16 md:w-20 lg:w-[82px]"
-                  src="/logo.png"
-                />
+                  src="/"
+                /> */}
+                Logo
               </Link>
             </motion.div>
 

@@ -124,7 +124,7 @@ export default function HeroSection(): JSX.Element {
     (): JSX.Element => (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-xl p-6 max-w-md w-full mx-4 transform transition-all">
-          <h3 className="text-xl font-bold text-[#2C3C81] mb-4">
+          <h3 className="text-xl font-bold text-[#35B354] mb-4">
             Book Free Consultation
           </h3>
           <div className="space-y-4">
@@ -138,7 +138,7 @@ export default function HeroSection(): JSX.Element {
               <input
                 id="full-name"
                 type="text"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#C73D43]"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#35B354]"
                 placeholder="Enter your full name"
                 aria-label="Full Name"
               />
@@ -153,7 +153,7 @@ export default function HeroSection(): JSX.Element {
               <input
                 id="email"
                 type="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#C73D43]"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#35B354]"
                 placeholder="Enter your email"
                 aria-label="Email"
               />
@@ -168,7 +168,7 @@ export default function HeroSection(): JSX.Element {
               <input
                 id="phone"
                 type="tel"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#C73D43]"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#35B354]"
                 placeholder="Enter your phone number"
                 aria-label="Phone Number"
               />
@@ -182,7 +182,7 @@ export default function HeroSection(): JSX.Element {
               </label>
               <select
                 id="country"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#C73D43]"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#35B354]"
                 aria-label="Preferred Country"
               >
                 <option value="">Select Country</option>
@@ -206,7 +206,7 @@ export default function HeroSection(): JSX.Element {
             </button>
             <button
               onClick={handleConsultationSubmit}
-              className="flex-1 px-4 py-2 bg-[#C73D43] text-white rounded-md hover:bg-[#2C3C81] transition-colors"
+              className="flex-1 px-4 py-2 bg-[#35B354] text-white rounded-md hover:bg-[#2a8e43] transition-colors"
               type="button"
               aria-label="Confirm consultation booking"
             >
@@ -223,44 +223,45 @@ export default function HeroSection(): JSX.Element {
     (): JSX.Element => (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-xl p-6 max-w-lg w-full mx-4 transform transition-all">
-          <h3 className="text-xl font-bold text-[#2C3C81] mb-4">
+          <h3 className="text-xl font-bold text-[#35B354] mb-4">
             Start Your Education Journey
           </h3>
           <div className="space-y-4">
             <p className="text-gray-600">
-              Choose your path to global education excellence:
+              Choose your path to global education excellence with Nextgen
+              Advisors:
             </p>
             <div className="grid grid-cols-1 gap-3">
               <button
-                className="p-4 border rounded-lg hover:border-[#C73D43] hover:bg-red-50 transition-all text-left"
+                className="p-4 border rounded-lg hover:border-[#35B354] hover:bg-green-50 transition-all text-left"
                 type="button"
                 aria-label="Undergraduate Programs"
               >
-                <div className="font-semibold text-[#2C3C81]">
+                <div className="font-semibold text-[#35B354]">
                   🎓 Undergraduate Programs
                 </div>
                 <div className="text-sm text-gray-600">
-                  Bachelor&apos;s degree programs worldwide
+                  Bachelor's degree programs worldwide
                 </div>
               </button>
               <button
-                className="p-4 border rounded-lg hover:border-[#C73D43] hover:bg-red-50 transition-all text-left"
+                className="p-4 border rounded-lg hover:border-[#35B354] hover:bg-green-50 transition-all text-left"
                 type="button"
                 aria-label="Graduate Programs"
               >
-                <div className="font-semibold text-[#2C3C81]">
+                <div className="font-semibold text-[#35B354]">
                   📚 Graduate Programs
                 </div>
                 <div className="text-sm text-gray-600">
-                  Master&apos;s and PhD programs
+                  Master's and PhD programs
                 </div>
               </button>
               <button
-                className="p-4 border rounded-lg hover:border-[#C73D43] hover:bg-red-50 transition-all text-left"
+                className="p-4 border rounded-lg hover:border-[#35B354] hover:bg-green-50 transition-all text-left"
                 type="button"
                 aria-label="Test Preparation"
               >
-                <div className="font-semibold text-[#2C3C81]">
+                <div className="font-semibold text-[#35B354]">
                   📝 Test Preparation
                 </div>
                 <div className="text-sm text-gray-600">
@@ -268,15 +269,15 @@ export default function HeroSection(): JSX.Element {
                 </div>
               </button>
               <button
-                className="p-4 border rounded-lg hover:border-[#C73D43] hover:bg-red-50 transition-all text-left"
+                className="p-4 border rounded-lg hover:border-[#35B354] hover:bg-green-50 transition-all text-left"
                 type="button"
-                aria-label="Scholarship Guidance"
+                aria-label="Visa Assistance"
               >
-                <div className="font-semibold text-[#2C3C81]">
-                  💰 Scholarship Guidance
+                <div className="font-semibold text-[#35B354]">
+                  ✈️ Visa Assistance
                 </div>
                 <div className="text-sm text-gray-600">
-                  Find and apply for scholarships
+                  Comprehensive visa guidance
                 </div>
               </button>
             </div>
@@ -292,7 +293,7 @@ export default function HeroSection(): JSX.Element {
             </button>
             <button
               onClick={handleJourneyStart}
-              className="flex-1 px-4 py-2 bg-[#C73D43] text-white rounded-md hover:bg-[#2C3C81] transition-colors"
+              className="flex-1 px-4 py-2 bg-[#35B354] text-white rounded-md hover:bg-[#2a8e43] transition-colors"
               type="button"
               aria-label="Get started with education journey"
             >
@@ -306,37 +307,37 @@ export default function HeroSection(): JSX.Element {
   );
 
   const statsData: StatData[] = [
-    { value: "98%", label: "Success Rate" },
-    { value: "50+", label: "Universities" },
-    { value: "15+", label: "Countries" },
+    { value: "95%", label: "Visa Success Rate" },
+    { value: "100+", label: "Partner Universities" },
+    { value: "10,000+", label: "Students Helped" },
   ];
 
   const floatingCardsData: FloatingCard[] = [
     {
       position: "top-4 right-0",
-      bg: "bg-[#2C3C81]",
-      text: "text-[#F5F4F5]",
-      title: "IELTS/TOEFL",
-      value: "Expert Prep",
+      bg: "bg-[#35B354]",
+      text: "text-white",
+      title: "Expert",
+      value: "Counseling",
     },
     {
       position: "top-1/2 left-0",
-      bg: "bg-[#C73D43]",
-      text: "text-[#F5F4F5]",
-      title: "Scholarships",
-      value: "$2M+ Secured",
+      bg: "bg-white",
+      text: "text-[#35B354]",
+      title: "Personalized",
+      value: "Guidance",
     },
     {
       position: "bottom-1/3 right-0",
-      bg: "bg-[#B2ACCE]",
-      text: "text-[#2C3C81]",
-      title: "Visa Success",
-      value: "98% Rate",
+      bg: "bg-[#35B354]",
+      text: "text-white",
+      title: "Visa",
+      value: "Assistance",
     },
     {
       position: "bottom-4 left-0",
-      bg: "bg-[#2C3C81]",
-      text: "text-[#F5F4F5]",
+      bg: "bg-white",
+      text: "text-[#35B354]",
       title: "Since",
       value: "2010",
     },
@@ -346,7 +347,7 @@ export default function HeroSection(): JSX.Element {
     <>
       <div
         ref={heroRef}
-        className="bg-[#F5F4F5] min-h-screen lg:pt-50 pt-24 pb-8 md:pb-16 overflow-hidden"
+        className="bg-white min-h-screen lg:pt-50 pt-24 pb-8 md:pb-16 overflow-hidden"
       >
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -355,7 +356,7 @@ export default function HeroSection(): JSX.Element {
               <div className="space-y-4 md:space-y-6">
                 <div
                   ref={addToRefs(textElementsRef, 0)}
-                  className="inline-block bg-[#B2ACCE]/30 text-[#2C3C81] px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-medium"
+                  className="inline-block bg-[#35B354]/20 text-[#35B354] px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-medium"
                 >
                   Trusted by 10,000+ Students Worldwide
                 </div>
@@ -363,44 +364,45 @@ export default function HeroSection(): JSX.Element {
                 <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                   <span
                     ref={addToRefs(textElementsRef, 1)}
-                    className="text-[#2C3C81] block"
+                    className="text-gray-800 block"
                   >
-                    Your Gateway to{" "}
+                    Empowering Your{" "}
                   </span>
                   <span
                     ref={addToRefs(textElementsRef, 2)}
-                    className="text-[#C73D43] block"
+                    className="text-[#35B354] block"
                   >
-                    Global
+                    Global Education
                   </span>
                   <span
                     ref={addToRefs(textElementsRef, 3)}
-                    className="text-[#C73D43] block"
+                    className="text-gray-800 block"
                   >
-                    Education{" "}
+                    Journey with{" "}
                   </span>
                   <span
                     ref={addToRefs(textElementsRef, 4)}
-                    className="text-[#2C3C81] block"
+                    className="text-[#35B354] block"
                   >
-                    Excellence
+                    Nextgen Advisors
                   </span>
                 </h1>
 
                 <p
                   ref={addToRefs(textElementsRef, 5)}
-                  className="text-[#2C3C81]/80 text-base md:text-lg max-w-lg leading-relaxed"
+                  className="text-gray-600 text-base md:text-lg max-w-lg leading-relaxed"
                 >
-                  At Gurukul Education Foundation, we transform dreams into
-                  reality. Expert guidance, comprehensive test prep, and
-                  personalized support for your international education journey.
+                  Premier educational consultancy providing end-to-end guidance
+                  for studying abroad. Expert counseling, personalized support,
+                  and access to top international universities to help you
+                  achieve your academic dreams.
                 </p>
               </div>
 
               <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => setShowJourneyModal(true)}
-                  className="group flex items-center justify-center space-x-2 bg-[#C73D43] text-[#F5F4F5] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#2C3C81] hover:shadow-lg transition-all duration-300 shadow-md"
+                  className="group flex items-center justify-center space-x-2 bg-[#35B354] text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#2a8e43] hover:shadow-lg transition-all duration-300 shadow-md"
                   type="button"
                   aria-label="Start your education journey"
                 >
@@ -410,7 +412,7 @@ export default function HeroSection(): JSX.Element {
 
                 <button
                   onClick={() => setShowConsultationModal(true)}
-                  className="group flex items-center justify-center space-x-2 bg-transparent border-2 border-[#2C3C81] text-[#2C3C81] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#2C3C81] hover:text-[#F5F4F5] hover:shadow-lg transition-all duration-300"
+                  className="group flex items-center justify-center space-x-2 bg-transparent border-2 border-[#35B354] text-[#35B354] px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#35B354] hover:text-white hover:shadow-lg transition-all duration-300"
                   type="button"
                   aria-label="Book free consultation"
                 >
@@ -422,17 +424,17 @@ export default function HeroSection(): JSX.Element {
               </div>
 
               {/* Success Stats */}
-              <div className="grid grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8 border-t border-[#B2ACCE]/30">
+              <div className="grid grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8 border-t border-gray-200">
                 {statsData.map((stat, index) => (
                   <div
                     key={`stat-${index}`}
                     ref={addToRefs(textElementsRef, 6 + index)}
                     className="text-center"
                   >
-                    <div className="text-xl md:text-2xl font-bold text-[#C73D43]">
+                    <div className="text-xl md:text-2xl font-bold text-[#35B354]">
                       {stat.value}
                     </div>
-                    <div className="text-xs md:text-sm text-[#2C3C81]/70">
+                    <div className="text-xs md:text-sm text-gray-600">
                       {stat.label}
                     </div>
                   </div>
@@ -449,7 +451,7 @@ export default function HeroSection(): JSX.Element {
                 {/* Hero Image */}
                 <Image
                   src="/girl.png"
-                  alt="Students studying abroad - Gurukul Education Foundation"
+                  alt="Students studying abroad - Nextgen Advisors"
                   fill
                   className="object-contain"
                   priority

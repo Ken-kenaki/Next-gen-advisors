@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   title: {
-    default: "Gurukul Education",
+    default: "Next Gen Advisors",
     template: "%s | Gurukul Education",
   },
   description:
