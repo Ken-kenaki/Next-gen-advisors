@@ -1,146 +1,227 @@
-// app/admin/resources/page.tsx (admin full CRUD UI)
 "use client";
-import { useEffect, useState, useRef } from "react";
-import { appwriteConfig } from "@/lib/appwrite/config";
+
+import { useEffect, useState } from "react";
+import { DatabaseService } from "@/lib/appwrite/database";
 import { StorageService } from "@/lib/appwrite/storage";
-import { FileText, Trash2, Eye, PlusCircle, Loader2 } from "lucide-react";
+import { appwriteConfig } from "@/lib/appwrite/config";
 
 export default function AdminResourcesPage() {
   const [resources, setResources] = useState<any[]>([]);
-  const [refresh, setRefresh] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLInputElement>(null);
-  const typeRef = useRef<HTMLInputElement>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(true);
+  const [file, setFile] = useState<File | null>(null);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
-    fetch("/api/resources")
-      .then((res) => res.json())
-      .then((data) => setResources(data.data.documents));
-  }, [refresh]);
+    fetchResources();
+  }, []);
 
-  const deleteResource = async (id: string) => {
-    await fetch(`/api/resources/${id}`, { method: "DELETE" });
-    setRefresh(!refresh);
+  const fetchResources = async () => {
+    try {
+      setLoading(true);
+      const response = await DatabaseService.getResources();
+      setResources(response.documents);
+    } catch (error) {
+      console.error("Failed to fetch resources:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleUpload = async () => {
-    const name = nameRef.current?.value;
-    const description = descriptionRef.current?.value;
-    const type = typeRef.current?.value;
-    const file = fileRef.current?.files?.[0];
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    if (!name || !type || !file)
-      return alert("Name, type, and file are required");
-
-    setIsUploading(true);
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("type", type);
-    formData.append("description", description || "");
-    formData.append("file", file);
-
-    const res = await fetch("/api/resources", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (res.ok) {
-      setRefresh(!refresh);
-      if (nameRef.current) nameRef.current.value = "";
-      if (descriptionRef.current) descriptionRef.current.value = "";
-      if (typeRef.current) typeRef.current.value = "";
-      if (fileRef.current) fileRef.current.value = "";
-    } else {
-      alert("Failed to upload resource");
+    if (!file || !name) {
+      alert("File and name are required");
+      return;
     }
 
-    setIsUploading(false);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("name", name);
+      formData.append("description", description);
+
+      const response = await fetch("/api/resources", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        fetchResources();
+        setName("");
+        setDescription("");
+        setFile(null);
+        alert("Resource added successfully");
+      } else {
+        throw new Error("Failed to add resource");
+      }
+    } catch (error) {
+      console.error("Error adding resource:", error);
+      alert("Failed to add resource");
+    }
   };
 
-  return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center">
-        📚 Admin Resource Manager
-      </h1>
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this resource?")) return;
 
-      <div className="mb-8 bg-gray-50 p-4 rounded-xl border">
-        <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
-          <PlusCircle className="w-5 h-5 text-green-600" /> Add New Resource
-        </h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          <input
-            ref={nameRef}
-            type="text"
-            placeholder="Name"
-            className="input input-bordered w-full"
-          />
-          <input
-            ref={typeRef}
-            type="text"
-            placeholder="Type (e.g. PDF)"
-            className="input input-bordered w-full"
-          />
-          <input
-            ref={descriptionRef}
-            type="text"
-            placeholder="Description (optional)"
-            className="input input-bordered w-full md:col-span-2"
-          />
-          <input
-            ref={fileRef}
-            type="file"
-            className="file-input file-input-bordered w-full md:col-span-2"
-          />
+    try {
+      const response = await fetch(`/api/resources/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        fetchResources();
+        alert("Resource deleted successfully");
+      } else {
+        throw new Error("Failed to delete resource");
+      }
+    } catch (error) {
+      console.error("Error deleting resource:", error);
+      alert("Failed to delete resource");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-8">Admin Resources</h1>
+        <p>Loading resources...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">Admin Resources</h1>
+
+      <div className="mb-8 bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold mb-4">Add New Resource</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              File
+            </label>
+            <input
+              type="file"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+              className="block w-full text-sm text-gray-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-md file:border-0
+                file:text-sm file:font-semibold
+                file:bg-blue-50 file:text-blue-700
+                hover:file:bg-blue-100"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Name
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Description (Optional)
+            </label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
           <button
-            onClick={handleUpload}
-            disabled={isUploading}
-            className="btn bg-blue-600 text-white hover:bg-blue-700 w-full md:col-span-2"
+            type="submit"
+            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            {isUploading ? (
-              <Loader2 className="animate-spin w-4 h-4 mr-2" />
-            ) : null}
-            {isUploading ? "Uploading..." : "Upload Resource"}
+            Upload Resource
           </button>
-        </div>
+        </form>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {resources.map((res) => (
-          <div
-            key={res.$id}
-            className="bg-white border border-gray-200 rounded-2xl shadow-md p-5 flex flex-col justify-between hover:shadow-lg transition-all"
-          >
-            <div className="flex items-center gap-3 mb-2">
-              <FileText className="text-blue-500 w-5 h-5" />
-              <h2 className="text-lg font-semibold truncate">{res.name}</h2>
-            </div>
-            <p className="text-sm text-gray-600 line-clamp-2 mb-4">
-              {res.description || "No description provided."}
-            </p>
-            <div className="flex justify-between text-sm">
-              <a
-                href={StorageService.getFileView(
-                  appwriteConfig.buckets.resources,
-                  res.fileId
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-blue-600 hover:underline"
-              >
-                <Eye className="w-4 h-4" /> View
-              </a>
-              <button
-                onClick={() => deleteResource(res.$id)}
-                className="flex items-center gap-1 text-red-600 hover:underline"
-              >
-                <Trash2 className="w-4 h-4" /> Delete
-              </button>
-            </div>
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold">Existing Resources</h2>
+        {resources.length === 0 ? (
+          <p>No resources found.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Description
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Type
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Size
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {resources.map((resource) => (
+                  <tr key={resource.$id}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900">
+                        {resource.name}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-500">
+                        {resource.description || "-"}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-500">
+                        {resource.type}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-500">
+                        {(resource.size / 1024).toFixed(2)} KB
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <a
+                        href={StorageService.getFileView(
+                          appwriteConfig.buckets.resources,
+                          resource.fileId
+                        )}
+                        download
+                        className="text-blue-600 hover:text-blue-900 mr-4"
+                      >
+                        Download
+                      </a>
+                      <button
+                        onClick={() => handleDelete(resource.$id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

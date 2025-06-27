@@ -1,44 +1,45 @@
-// app/api/resources/[id]/route.ts (GET single, PUT update, DELETE)
-import { NextRequest, NextResponse } from "next/server";
 import { DatabaseService } from "@/lib/appwrite/database";
+import { StorageService } from "@/lib/appwrite/storage";
+import { NextResponse } from "next/server";
 import { appwriteConfig } from "@/lib/appwrite/config";
 
 export async function GET(
-  _req: NextRequest,
+  request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
-    const document = await DatabaseService.getResource(params.id);
-    return NextResponse.json({ success: true, document });
+    const resource = await DatabaseService.getResource(params.id);
+    return NextResponse.json(resource);
   } catch (error) {
-    console.error("GET /api/resources/:id error:", error);
-    return NextResponse.json({ success: false, error }, { status: 500 });
-  }
-}
-
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const body = await req.json();
-    const updated = await DatabaseService.updateResource(params.id, body);
-    return NextResponse.json({ success: true, updated });
-  } catch (error) {
-    console.error("PUT /api/resources/:id error:", error);
-    return NextResponse.json({ success: false, error }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch resource" },
+      { status: 500 }
+    );
   }
 }
 
 export async function DELETE(
-  _req: NextRequest,
+  request: Request,
   { params }: { params: { id: string } }
 ) {
   try {
+    // First get the resource to access the fileId
+    const resource = await DatabaseService.getResource(params.id);
+
+    // Delete the file from storage
+    await StorageService.deleteFile(
+      appwriteConfig.buckets.resources,
+      resource.fileId
+    );
+
+    // Delete the resource record
     await DatabaseService.deleteResource(params.id);
+
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("DELETE /api/resources/:id error:", error);
-    return NextResponse.json({ success: false, error }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to delete resource" },
+      { status: 500 }
+    );
   }
 }

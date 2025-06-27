@@ -1,17 +1,29 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Eye, Download, Search, Trash2 } from "lucide-react";
+import {
+  Eye,
+  Download,
+  Search,
+  Trash2,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 
 type FormStatus = "pending" | "responded";
 
 interface FormSubmission {
   id: string;
-  name: string;
+  fullName: string;
   email: string;
-  phone: string;
-  subject: string;
-  message: string;
+  phoneNumber: string;
+  currentAddress: string;
+  academicQualification: string;
+  studyDestinations: string[];
+  studyLevel: string;
+  englishTest: string;
+  passportStatus: string;
+  studyReason: string;
   status: FormStatus;
   createdAt?: string;
 }
@@ -24,6 +36,7 @@ export default function FormsPage() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [selectedSubmission, setSelectedSubmission] =
     useState<FormSubmission | null>(null);
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetchFormSubmissions();
@@ -42,11 +55,16 @@ export default function FormsPage() {
 
       const submissions = data.documents.map((doc: any) => ({
         id: doc.$id,
-        name: doc.name,
+        fullName: doc.fullName,
         email: doc.email,
-        phone: doc.phone,
-        subject: doc.subject,
-        message: doc.message,
+        phoneNumber: doc.phoneNumber,
+        currentAddress: doc.currentAddress,
+        academicQualification: doc.academicQualification,
+        studyDestinations: doc.studyDestinations,
+        studyLevel: doc.studyLevel,
+        englishTest: doc.englishTest,
+        passportStatus: doc.passportStatus,
+        studyReason: doc.studyReason,
         status: doc.status === "responded" ? "responded" : "pending",
         createdAt: doc.$createdAt || doc.createdAt,
       }));
@@ -107,25 +125,46 @@ export default function FormsPage() {
     }
   };
 
+  const toggleRowExpand = (id: string) => {
+    const newExpandedRows = new Set(expandedRows);
+    if (newExpandedRows.has(id)) {
+      newExpandedRows.delete(id);
+    } else {
+      newExpandedRows.add(id);
+    }
+    setExpandedRows(newExpandedRows);
+  };
+
   const exportToCSV = () => {
     const headers = [
-      "Name",
+      "Full Name",
       "Email",
-      "Phone",
-      "Subject",
-      "Message",
+      "Phone Number",
+      "Current Address",
+      "Academic Qualification",
+      "Study Destinations",
+      "Level of Study",
+      "English Test",
+      "Passport Status",
+      "Study Reason",
       "Status",
       "Date",
     ];
+
     const csvContent = [
       headers.join(","),
       ...filteredSubmissions.map((sub) =>
         [
-          sub.name,
+          sub.fullName,
           sub.email,
-          sub.phone,
-          sub.subject,
-          `"${sub.message.replace(/"/g, '""')}"`,
+          sub.phoneNumber,
+          sub.currentAddress,
+          sub.academicQualification,
+          `"${sub.studyDestinations.join(", ")}"`,
+          sub.studyLevel,
+          sub.englishTest,
+          sub.passportStatus,
+          `"${sub.studyReason.replace(/"/g, '""')}"`,
           sub.status,
           sub.createdAt ? new Date(sub.createdAt).toLocaleDateString() : "N/A",
         ].join(",")
@@ -136,16 +175,19 @@ export default function FormsPage() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "form-submissions.csv";
+    a.download = "application-submissions.csv";
     a.click();
     window.URL.revokeObjectURL(url);
   };
 
   const filteredSubmissions = formSubmissions.filter((submission) => {
     const matchesSearch =
-      submission.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      submission.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      submission.subject.toLowerCase().includes(searchTerm.toLowerCase());
+      submission.phoneNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      submission.studyDestinations.some((dest) =>
+        dest.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
     const matchesStatus =
       statusFilter === "all" || submission.status === statusFilter;
@@ -156,7 +198,7 @@ export default function FormsPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
       </div>
     );
   }
@@ -166,7 +208,7 @@ export default function FormsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Form Submissions
+          Application Submissions
         </h1>
         <div className="flex flex-col sm:flex-row gap-2">
           <select
@@ -218,6 +260,202 @@ export default function FormsPage() {
         />
       </div>
 
+      {/* Desktop Table */}
+      <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Name
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Email
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Phone
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Destinations
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Date
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredSubmissions.map((submission) => (
+                <>
+                  <tr
+                    key={submission.id}
+                    className="hover:bg-gray-50 cursor-pointer"
+                  >
+                    <td
+                      className="px-6 py-4 whitespace-nowrap"
+                      onClick={() => toggleRowExpand(submission.id)}
+                    >
+                      <div className="flex items-center">
+                        <div className="text-sm font-medium text-gray-900">
+                          {submission.fullName}
+                        </div>
+                        <button
+                          className="ml-2 text-gray-500 hover:text-gray-700"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleRowExpand(submission.id);
+                          }}
+                        >
+                          {expandedRows.has(submission.id) ? (
+                            <ChevronUp size={16} />
+                          ) : (
+                            <ChevronDown size={16} />
+                          )}
+                        </button>
+                      </div>
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap"
+                      onClick={() => toggleRowExpand(submission.id)}
+                    >
+                      <div className="text-sm text-gray-900">
+                        {submission.email}
+                      </div>
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap"
+                      onClick={() => toggleRowExpand(submission.id)}
+                    >
+                      <div className="text-sm text-gray-900">
+                        {submission.phoneNumber}
+                      </div>
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap"
+                      onClick={() => toggleRowExpand(submission.id)}
+                    >
+                      <div className="text-sm text-gray-900">
+                        {submission.studyDestinations.join(", ")}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <select
+                        value={submission.status}
+                        onChange={(e) =>
+                          updateStatus(
+                            submission.id,
+                            e.target.value as FormStatus
+                          )
+                        }
+                        className={`text-xs font-semibold rounded-full px-2 py-1 border-none cursor-pointer ${
+                          submission.status === "responded"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-yellow-100 text-yellow-800"
+                        }`}
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="responded">Responded</option>
+                      </select>
+                    </td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                      onClick={() => toggleRowExpand(submission.id)}
+                    >
+                      {submission.createdAt
+                        ? new Date(submission.createdAt).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => setSelectedSubmission(submission)}
+                          className="text-blue-600 hover:text-blue-900"
+                          aria-label="View details"
+                        >
+                          <Eye size={16} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(submission.id)}
+                          className="text-red-600 hover:text-red-900"
+                          aria-label="Delete"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  {expandedRows.has(submission.id) && (
+                    <tr className="bg-gray-50">
+                      <td colSpan={7} className="px-6 py-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <h3 className="font-medium text-gray-700 mb-2">
+                              Full Details
+                            </h3>
+                            <div className="space-y-2">
+                              <div>
+                                <span className="text-gray-500">
+                                  Current Address:
+                                </span>
+                                <p>{submission.currentAddress}</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-500">
+                                  Academic Qualification:
+                                </span>
+                                <p>{submission.academicQualification}</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-500">
+                                  Level of Study:
+                                </span>
+                                <p>{submission.studyLevel}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <h3 className="font-medium text-gray-700 mb-2">
+                              Additional Info
+                            </h3>
+                            <div className="space-y-2">
+                              <div>
+                                <span className="text-gray-500">
+                                  English Test:
+                                </span>
+                                <p>{submission.englishTest}</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-500">
+                                  Passport Status:
+                                </span>
+                                <p>{submission.passportStatus}</p>
+                              </div>
+                              <div>
+                                <span className="text-gray-500">
+                                  Study Reason:
+                                </span>
+                                <p className="whitespace-pre-wrap">
+                                  {submission.studyReason}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* Mobile View */}
       <div className="block md:hidden space-y-4">
         {filteredSubmissions.map((submission) => (
@@ -228,7 +466,7 @@ export default function FormsPage() {
             <div className="flex justify-between items-start mb-3">
               <div className="flex-1 min-w-0">
                 <h3 className="font-medium text-gray-900 truncate">
-                  {submission.name}
+                  {submission.fullName}
                 </h3>
                 <p className="text-sm text-gray-500 truncate">
                   {submission.email}
@@ -255,10 +493,18 @@ export default function FormsPage() {
             <div className="space-y-2">
               <div>
                 <span className="text-xs font-medium text-gray-500">
-                  Subject:
+                  Phone:
                 </span>
-                <p className="text-sm text-gray-900 truncate">
-                  {submission.subject}
+                <p className="text-sm text-gray-900">
+                  {submission.phoneNumber}
+                </p>
+              </div>
+              <div>
+                <span className="text-xs font-medium text-gray-500">
+                  Destinations:
+                </span>
+                <p className="text-sm text-gray-900">
+                  {submission.studyDestinations.join(", ")}
                 </p>
               </div>
 
@@ -289,99 +535,6 @@ export default function FormsPage() {
         ))}
       </div>
 
-      {/* Desktop Table */}
-      <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Email
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Subject
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredSubmissions.map((submission) => (
-                <tr key={submission.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
-                      {submission.name}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">
-                      {submission.email}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900 max-w-xs truncate">
-                      {submission.subject}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <select
-                      value={submission.status}
-                      onChange={(e) =>
-                        updateStatus(
-                          submission.id,
-                          e.target.value as FormStatus
-                        )
-                      }
-                      className={`text-xs font-semibold rounded-full px-2 py-1 border-none cursor-pointer ${
-                        submission.status === "responded"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-yellow-100 text-yellow-800"
-                      }`}
-                    >
-                      <option value="pending">Pending</option>
-                      <option value="responded">Responded</option>
-                    </select>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {submission.createdAt
-                      ? new Date(submission.createdAt).toLocaleDateString()
-                      : "N/A"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() => setSelectedSubmission(submission)}
-                        className="text-blue-600 hover:text-blue-900"
-                        aria-label="View details"
-                      >
-                        <Eye size={16} />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(submission.id)}
-                        className="text-red-600 hover:text-red-900"
-                        aria-label="Delete"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
       {/* Empty State */}
       {filteredSubmissions.length === 0 && !loading && (
         <div className="text-center py-12 bg-white rounded-lg shadow">
@@ -404,27 +557,122 @@ export default function FormsPage() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-6">
-              <h2 className="text-xl font-bold mb-4">
-                Form Submission Details
-              </h2>
-              <div className="space-y-4">
-                {Object.entries(selectedSubmission).map(([key, value]) => {
-                  if (key === "id") return null;
-                  return (
-                    <div key={key}>
-                      <label className="block text-sm font-medium text-gray-700 capitalize">
-                        {key}
-                      </label>
-                      <p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap break-words">
-                        {key === "createdAt" && value
-                          ? new Date(value).toLocaleString()
-                          : String(value)}
-                      </p>
-                    </div>
-                  );
-                })}
+              <h2 className="text-xl font-bold mb-4">Application Details</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Full Name
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.fullName}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Email
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.email}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Phone Number
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.phoneNumber}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Current Address
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.currentAddress}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Academic Qualification
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.academicQualification}
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Study Destinations
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.studyDestinations.join(", ")}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Level of Study
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.studyLevel}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      English Proficiency Test
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.englishTest}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Passport Status
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {selectedSubmission.passportStatus}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Status
+                    </label>
+                    <select
+                      value={selectedSubmission.status}
+                      onChange={(e) => {
+                        updateStatus(
+                          selectedSubmission.id,
+                          e.target.value as FormStatus
+                        );
+                        setSelectedSubmission({
+                          ...selectedSubmission,
+                          status: e.target.value as FormStatus,
+                        });
+                      }}
+                      className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="responded">Responded</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <div className="flex justify-end mt-6">
+              <div className="mt-6">
+                <label className="block text-sm font-medium text-gray-700">
+                  Why do you want to study abroad?
+                </label>
+                <p className="mt-1 text-sm text-gray-900 whitespace-pre-wrap">
+                  {selectedSubmission.studyReason}
+                </p>
+              </div>
+              <div className="flex justify-end mt-6 space-x-3">
+                <button
+                  onClick={() => handleDelete(selectedSubmission.id)}
+                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                >
+                  Delete
+                </button>
                 <button
                   onClick={() => setSelectedSubmission(null)}
                   className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"

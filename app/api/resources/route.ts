@@ -1,25 +1,54 @@
-// app/api/resources/route.ts (GET all, POST new)
-import { NextRequest, NextResponse } from "next/server";
 import { DatabaseService } from "@/lib/appwrite/database";
+import { StorageService } from "@/lib/appwrite/storage";
+import { NextResponse } from "next/server";
 import { appwriteConfig } from "@/lib/appwrite/config";
 
 export async function GET() {
   try {
-    const data = await DatabaseService.getResources();
-    return NextResponse.json({ success: true, data });
+    const resources = await DatabaseService.getResources();
+    return NextResponse.json(resources);
   } catch (error) {
-    console.error("GET /api/resources error:", error);
-    return NextResponse.json({ success: false, error }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch resources" },
+      { status: 500 }
+    );
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const body = await req.json();
-    const document = await DatabaseService.createResource(body);
-    return NextResponse.json({ success: true, document });
+    const formData = await request.formData();
+    const file = formData.get("file") as File;
+    const name = formData.get("name") as string;
+    const description = formData.get("description") as string;
+
+    if (!file || !name) {
+      return NextResponse.json(
+        { error: "File and name are required" },
+        { status: 400 }
+      );
+    }
+
+    // Upload file to storage
+    const uploadedFile = await StorageService.uploadFile(
+      appwriteConfig.buckets.resources,
+      file
+    );
+
+    // Create resource record in database
+    const resource = await DatabaseService.createResource({
+      fileId: uploadedFile.$id,
+      name,
+      description,
+      type: file.type,
+      size: file.size,
+    });
+
+    return NextResponse.json(resource);
   } catch (error) {
-    console.error("POST /api/resources error:", error);
-    return NextResponse.json({ success: false, error }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to create resource" },
+      { status: 500 }
+    );
   }
 }

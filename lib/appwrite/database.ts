@@ -30,11 +30,16 @@ export interface NewsEvent {
 
 export interface FormSubmission {
   $id?: string;
-  name: string;
+  fullName: string;
+  phoneNumber: string;
   email: string;
-  phone: string;
-  subject: string;
-  message: string;
+  currentAddress: string;
+  academicQualification: string;
+  studyDestinations: string[];
+  studyLevel: string;
+  englishTest: string;
+  passportStatus: string;
+  studyReason: string;
   status: "pending" | "responded";
   createdAt?: string;
 }
