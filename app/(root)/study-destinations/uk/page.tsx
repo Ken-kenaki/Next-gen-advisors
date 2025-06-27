@@ -70,7 +70,7 @@ export default function StudyInUK() {
       <div className="relative bg-gray-900">
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+            src="/uk.jpg"
             alt="UK University Campus"
             fill
             className="object-cover opacity-50"
@@ -222,14 +222,20 @@ export default function StudyInUK() {
           </p>
         </div>
 
-        <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-xl">
-          <iframe
-            className="w-full h-[500px]"
-            src="https://www.youtube.com/embed/7Yp7O5KZLGs"
+        {/* Video Container - This will give the video a fixed aspect ratio */}
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-xl">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src="/Video/uk.mp4"
             title="UK University Experience"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+            controls
+            loop
+            muted
+            playsInline
+            autoPlay
+          >
+            <p>Your browser does not support HTML5 video.</p>
+          </video>
         </div>
       </div>
 

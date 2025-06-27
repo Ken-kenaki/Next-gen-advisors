@@ -118,10 +118,26 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: <Facebook size={20} />, url: "#", label: "Facebook" },
-    { icon: <Instagram size={20} />, url: "#", label: "Instagram" },
-    { icon: <Twitter size={20} />, url: "#", label: "Twitter" },
-    { icon: <Youtube size={20} />, url: "#", label: "YouTube" },
+    {
+      icon: <Facebook size={20} className="text-white hover:text-[#35B354]" />,
+      url: "https://www.facebook.com/share/19KkSqKWpU/",
+      label: "Facebook",
+    },
+    {
+      icon: <Instagram size={20} className="text-white hover:text-[#35B354]" />,
+      url: "https://www.instagram.com/advisorsnextgen?igsh=YWZoZ2N2Z3FpaGNn",
+      label: "Instagram",
+    },
+    {
+      icon: <Twitter size={20} className="text-white hover:text-[#35B354]" />,
+      url: "#",
+      label: "Twitter",
+    },
+    {
+      icon: <Tiktok size={20} className="text-white hover:text-[#35B354]" />,
+      url: "https://www.tiktok.com/@nextgen.advisors?_t=ZS-8xXmzvxH4Rb&_r=1",
+      label: "TikTok",
+    },
   ];
 
   const legalLinks = [
@@ -131,7 +147,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 text-gray-100 pt-12 pb-8 px-4 sm:px-6">
+    <footer className="bg-[#35B354] text-white pt-12 pb-8 px-4 sm:px-6">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-12">
           {/* Footer Columns */}
@@ -141,12 +157,12 @@ export default function Footer() {
                 {column.icon}
                 {column.title}
               </h3>
-              <ul className="space-y-2 text-gray-300">
+              <ul className="space-y-2">
                 {column.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <Link
                       href={link.url}
-                      className="hover:text-[#35B354] transition-colors duration-200 text-sm sm:text-base"
+                      className="hover:text-gray-100 transition-colors duration-200 text-sm sm:text-base"
                     >
                       {link.name}
                     </Link>
@@ -159,14 +175,14 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="md:col-span-2 lg:col-span-1 space-y-4">
             <h3 className="text-lg font-semibold">Contact Us</h3>
-            <ul className="space-y-3 text-gray-300">
+            <ul className="space-y-3">
               {contactInfo.map((info, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <span aria-hidden="true">{info.icon}</span>
                   {info.isLink && info.url ? (
                     <Link
                       href={info.url}
-                      className="hover:text-[#35B354] transition-colors duration-200 text-sm sm:text-base"
+                      className="hover:text-gray-100 transition-colors duration-200 text-sm sm:text-base"
                     >
                       {info.text}
                     </Link>
@@ -181,7 +197,7 @@ export default function Footer() {
                 <Link
                   key={index}
                   href={social.url}
-                  className="text-gray-300 hover:text-[#35B354] transition-colors duration-200"
+                  className="transition-colors duration-200"
                   aria-label={`Visit our ${social.label}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -194,10 +210,10 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-700 my-6 sm:my-8"></div>
+        <div className="border-t border-white/20 my-6 sm:my-8"></div>
 
         {/* Bottom Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-gray-400 text-xs sm:text-sm">
+        <div className="flex flex-col md:flex-row justify-between items-center text-white/80 text-xs sm:text-sm">
           <div className="mb-4 md:mb-0">
             © {new Date().getFullYear()} Nextgen Advisors. All rights reserved.
           </div>
@@ -206,7 +222,7 @@ export default function Footer() {
               <Link
                 key={index}
                 href={link.url}
-                className="hover:text-[#35B354] transition-colors duration-200"
+                className="hover:text-white transition-colors duration-200"
               >
                 {link.name}
               </Link>
@@ -215,5 +231,27 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+// Add the TikTok icon component since it's not in lucide-react by default
+function Tiktok(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M12 9a4 4 0 0 0-4 4v1a4 4 0 0 0 4 4 4 4 0 0 0 4-4v-1a4 4 0 0 0-4-4z" />
+      <path d="M16 8V7a4 4 0 0 0-4-4H8" />
+      <path d="M8 12a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-1a4 4 0 0 0-4-4h-4a4 4 0 0 0-4 4z" />
+    </svg>
   );
 }

@@ -11,6 +11,7 @@ import {
   BookOpen,
   Image,
   FileText,
+  Folder,
   Calendar,
   Globe,
   GraduationCap,
@@ -45,7 +46,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ user }) => {
     { name: "Gallery", href: "/admin/gallery", icon: Image },
     { name: "Forms", href: "/admin/forms", icon: FileText },
     { name: "Events & News", href: "/admin/events-news", icon: Calendar },
-    { name: "Countries", href: "/admin/countries", icon: Globe },
+    { name: "Resources", href: "/admin/resources", icon: Folder },
     { name: "Universities", href: "/admin/universities", icon: GraduationCap },
   ];
 

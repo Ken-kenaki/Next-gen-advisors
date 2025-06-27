@@ -48,7 +48,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="bg-white pt-25 py-16 px-4 sm:px-6">
+    <section className="bg-white pt-55 py-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 items-center">

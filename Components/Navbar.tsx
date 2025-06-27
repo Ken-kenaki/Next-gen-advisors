@@ -222,6 +222,13 @@ export default function Navbar() {
           >
             APPLY ONLINE
           </Link>
+          <Link
+            href="/login"
+            className="hover:opacity-80 transition-opacity whitespace-nowrap"
+            aria-label="Apply online"
+          >
+            LOGIN
+          </Link>
         </div>
       </motion.div>
 
@@ -249,7 +256,12 @@ export default function Navbar() {
                 className="text-2xl md:text-3xl font-bold"
                 aria-label="Home"
               >
-                Logo
+                <Image
+                  src="/logo.png"
+                  alt="Next Gen Advisors"
+                  width={100}
+                  height={100}
+                />
               </Link>
             </motion.div>
 
@@ -579,6 +591,15 @@ export default function Navbar() {
                         aria-label="Apply online"
                       >
                         APPLY ONLINE
+                      </Link>
+
+                      <Link
+                        href="/login"
+                        className="block py-2 text-gray-700 hover:text-[#35B354] font-medium transition-colors"
+                        onClick={() => setIsOpen(false)}
+                        aria-label="Apply online"
+                      >
+                        LOGIN
                       </Link>
                     </div>
 
