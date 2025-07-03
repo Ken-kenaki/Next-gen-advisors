@@ -1,16 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Target,
-  Globe,
-  Users,
-  BookOpen,
-  Heart,
-  MessageSquare,
-  ChevronRight,
-} from "lucide-react";
+import { Target, Globe, Heart, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import StudentSuccessCarousel from "@/Components/StudentSuccess";
+import GlimpseThroughImages from "@/Components/Glimpse";
+import ConnectWithUs from "@/Components/ConnectWithUs";
+import FindUs from "@/Components/AboutFindUs";
 
 interface ValueItem {
   icon: React.ComponentType<{ className?: string }>;
@@ -20,10 +16,10 @@ interface ValueItem {
 
 export default function AboutSection() {
   const stats = [
-    { value: "10,000+", label: "Students Guided" },
-    { value: "15+", label: "Countries" },
-    { value: "500+", label: "Universities" },
-    { value: "98%", label: "Success Rate" },
+    { label: "Students Guided" },
+    { label: "Countries Served" },
+    { label: "University Partners" },
+    { label: "Visa Success" },
   ];
 
   const values: ValueItem[] = [
@@ -48,10 +44,10 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="bg-white pt-55 py-16 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-white pt-45">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 items-center pt-16">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -68,7 +64,7 @@ export default function AboutSection() {
                 Trusted Education Partner
               </span>
               <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-                <span className="text-[#35B354]">Nextgen</span> Advisors
+                About <span className="text-[#35B354]">Nextgen</span> Advisors
               </h1>
               <p className="text-lg text-gray-600">
                 A premier educational consultancy helping students pursue their
@@ -89,7 +85,7 @@ export default function AboutSection() {
                   className="bg-white p-4 rounded-lg border border-[#35B354]/20 hover:bg-[#35B354]/5 transition-colors shadow-sm hover:shadow-md"
                 >
                   <p className="text-2xl font-bold text-[#35B354]">
-                    {stat.value}
+                    {/* Empty value - number removed */}
                   </p>
                   <p className="text-gray-600 text-sm">{stat.label}</p>
                 </motion.div>
@@ -116,15 +112,14 @@ export default function AboutSection() {
             className="relative h-80 sm:h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
           >
             <Image
-              src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-              alt="Students studying abroad"
+              src="/about-2.jpg"
+              alt="Students at university"
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
               priority
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
           </motion.div>
         </div>
 
@@ -137,10 +132,10 @@ export default function AboutSection() {
             viewport={{ once: true }}
           >
             <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-[#35B354]/10 text-[#35B354] mb-4">
-              Why Choose Us
+              Our Core Values
             </span>
             <h2 className="text-3xl font-bold text-gray-900 mb-12">
-              Our Core <span className="text-[#35B354]">Principles</span>
+              What <span className="text-[#35B354]">Defines</span> Us
             </h2>
           </motion.div>
 
@@ -224,59 +219,39 @@ export default function AboutSection() {
                 transition={{ delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                With partnerships across 15+ countries and relationships with
-                over 500 universities worldwide, we continue to expand
-                opportunities while maintaining the personalized touch that sets
-                us apart.
+                With partnerships across multiple countries and relationships
+                with universities worldwide, we continue to expand opportunities
+                while maintaining the personalized touch that sets us apart.
               </motion.p>
             </div>
           </div>
         </motion.div>
 
-        {/* Testimonials Placeholder */}
+        {/* Success Stories Section */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center mb-16"
         >
           <div className="mb-12">
             <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-[#35B354]/10 text-[#35B354] mb-4">
-              Student Voices
+              Student Experiences
             </span>
-            <h2 className="text-3xl font-bold text-gray-900">
-              Success <span className="text-[#35B354]">Stories</span>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Our <span className="text-[#35B354]">Success Stories</span>
             </h2>
           </div>
 
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-white p-8 rounded-2xl shadow-lg border border-[#35B354]/10 hover:shadow-xl transition-all duration-300 max-w-3xl mx-auto"
-          >
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 rounded-full bg-[#35B354]/10 flex items-center justify-center">
-                <MessageSquare className="w-8 h-8 text-[#35B354]" />
-              </div>
-            </div>
-            <blockquote className="text-gray-600 italic text-lg mb-6">
-              "Testimonials from our students will appear here. We're collecting
-              inspiring stories of students who achieved their dreams through
-              our guidance."
-            </blockquote>
-            <div className="flex justify-center space-x-2">
-              {[1, 2, 3].map((item) => (
-                <motion.div
-                  key={item}
-                  whileHover={{ scale: 1.2 }}
-                  className={`w-3 h-3 rounded-full ${
-                    item === 1 ? "bg-[#35B354]" : "bg-[#35B354]/30"
-                  }`}
-                />
-              ))}
-            </div>
-          </motion.div>
+          <StudentSuccessCarousel />
         </motion.div>
+
+        {/* Glimpse Through Images Section */}
+        <GlimpseThroughImages />
+
+        {/* Additional Sections */}
+        <FindUs />
       </div>
     </section>
   );

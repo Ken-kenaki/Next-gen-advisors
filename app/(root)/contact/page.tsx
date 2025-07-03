@@ -1,354 +1,379 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
+import FormHeader from "@/Components/FormHeaderContact";
+import FormField from "@/Components/FormField";
+import SubmitButton from "@/Components/SubmitButton";
+import ContactInfo from "@/Components/ContactInfo";
+import SocialLinks from "@/Components/SocialMediaLinks";
 
-export default function Admission() {
-  const [form, setForm] = useState({
-    name: "",
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      when: "beforeChildren",
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+export default function ContactUs() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phoneNumber: "",
     email: "",
-    phone: "",
-    message: "",
+    currentAddress: "",
+    academicQualification: "",
+    studyDestinations: [] as string[],
+    studyLevel: "",
+    englishTest: "",
+    passportStatus: "",
+    studyReason: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [error, setError] = useState("");
-  const statsRef = useRef(null);
-
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+
+    if (type === "checkbox") {
+      const checked = (e.target as HTMLInputElement).checked;
+      const updatedDestinations = checked
+        ? [...formData.studyDestinations, value]
+        : formData.studyDestinations.filter((dest) => dest !== value);
+
+      setFormData({ ...formData, studyDestinations: updatedDestinations });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const validateForm = () => {
+    const requiredFields = [
+      formData.fullName,
+      formData.phoneNumber,
+      formData.email,
+      formData.currentAddress,
+      formData.academicQualification,
+      formData.studyLevel,
+      formData.englishTest,
+      formData.passportStatus,
+      formData.studyReason,
+    ];
+
+    if (requiredFields.some((field) => !field)) {
+      return false;
+    }
+
+    if (formData.studyDestinations.length === 0) {
+      return false;
+    }
+
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
     setIsSubmitting(true);
-    setError("");
 
     try {
+      const submissionData = {
+        fullName: formData.fullName,
+        phoneNumber: formData.phoneNumber,
+        email: formData.email,
+        currentAddress: formData.currentAddress,
+        academicQualification: formData.academicQualification,
+        studyDestinations: formData.studyDestinations,
+        studyLevel: formData.studyLevel,
+        englishTest: formData.englishTest,
+        passportStatus: formData.passportStatus,
+        studyReason: formData.studyReason,
+        status: "pending",
+      };
+
       const response = await fetch("/api/forms", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(submissionData),
       });
+
+      const result = await response.json();
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to submit form");
+        throw new Error(result.error || "Failed to submit form");
       }
 
-      const data = await response.json();
-      setShowSuccess(true);
-      setForm({
-        name: "",
+      toast.success("Your application has been submitted successfully!");
+
+      setFormData({
+        fullName: "",
+        phoneNumber: "",
         email: "",
-        phone: "",
-        message: "",
+        currentAddress: "",
+        academicQualification: "",
+        studyDestinations: [],
+        studyLevel: "",
+        englishTest: "",
+        passportStatus: "",
+        studyReason: "",
       });
-      setTimeout(() => setShowSuccess(false), 3000);
-    } catch (err) {
-      console.error("Form submission error:", err);
-      setError(
-        err instanceof Error ? err.message : "An unknown error occurred"
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "There was an error submitting your application. Please try again."
       );
-      setTimeout(() => setError(""), 3000);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Animation setup
-  useEffect(() => {
-    if (statsRef.current) {
-      const children = statsRef.current.children;
-      Array.from(children).forEach((child: HTMLElement, index: number) => {
-        child.style.opacity = "0";
-        child.style.transform = "translateY(30px)";
-
-        setTimeout(() => {
-          child.style.transition =
-            "all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
-          child.style.opacity = "1";
-          child.style.transform = "translateY(0)";
-        }, index * 200 + 500);
-      });
-    }
-  }, []);
-
-  const stats = [
-    { number: "2000+", label: "Students Abroad" },
-    { number: "12+", label: "Years Experience" },
-    { number: "95%", label: "Visa Success Rate" },
-  ];
-
   return (
-    <main className="overflow-x-hidden">
-      <div
-        className="w-full max-w-[100vw] min-h-screen pt-50 py-12 px-4 sm:px-6"
-        style={{ background: "linear-gradient(to bottom, #F5F4F5, #ffffff)" }}
-      >
-        {/* Success Popup - Made responsive */}
-        {showSuccess && (
-          <div className="fixed inset-0 flex items-start justify-center p-4 pt-20 pointer-events-none z-50">
-            <div
-              className="text-white px-6 py-3 rounded-lg shadow-lg max-w-full mx-4 animate-bounce"
-              style={{ backgroundColor: "#2C3C81" }}
+    <div className="min-h-screen pt-55 bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <FormHeader />
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white rounded-2xl shadow-xl overflow-hidden"
+        >
+          <form onSubmit={handleSubmit} className="p-6 sm:p-8">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+              className="space-y-6"
             >
-              Consultation Request Successful! We'll contact you soon.
-            </div>
-          </div>
-        )}
+              <motion.div variants={itemVariants}>
+                <FormField
+                  label="Full Name"
+                  name="fullName"
+                  type="text"
+                  required
+                  value={formData.fullName}
+                  onChange={handleChange}
+                />
+              </motion.div>
 
-        {/* Error Message - Made responsive */}
-        {error && (
-          <div className="fixed inset-0 flex items-start justify-center p-4 pt-20 pointer-events-none z-50">
-            <div
-              className="text-white px-6 py-3 rounded-lg shadow-lg max-w-full mx-4"
-              style={{ backgroundColor: "#C73D43" }}
-            >
-              {error}
-            </div>
-          </div>
-        )}
+              <motion.div variants={itemVariants}>
+                <FormField
+                  label="Phone Number (include country code)"
+                  name="phoneNumber"
+                  type="tel"
+                  required
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                />
+              </motion.div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h1
-              className="text-4xl md:text-5xl font-bold mb-4"
-              style={{ color: "#2C3C81" }}
-            >
-              Study Abroad Consultation
-            </h1>
-            <p className="text-xl max-w-2xl mx-auto" style={{ color: "#666" }}>
-              Turn your dream of studying abroad into reality with Nepal's
-              trusted education consultancy
-            </p>
-          </div>
+              <motion.div variants={itemVariants}>
+                <FormField
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </motion.div>
 
-          {/* Hero Image with Animated Stats */}
-          <div className="relative mb-16">
-            <div className="relative h-[500px] w-full flex items-center justify-center">
-              {/* Hero Image - Clean PNG without background */}
-              <img
-                src="/hero.png"
-                alt="Study Abroad Consultation"
-                className="max-h-full max-w-full object-contain"
-              />
+              <motion.div variants={itemVariants}>
+                <FormField
+                  label="Current Address (City/District)"
+                  name="currentAddress"
+                  type="text"
+                  required
+                  value={formData.currentAddress}
+                  onChange={handleChange}
+                />
+              </motion.div>
 
-              {/* Animated Stats */}
-              <div
-                ref={statsRef}
-                className="absolute inset-0 pointer-events-none"
-              >
-                {stats.map((stat, index) => (
-                  <div
-                    key={index}
-                    className={`absolute bg-white rounded-xl shadow-lg p-4 flex flex-col items-center justify-center border-2 pointer-events-auto ${
-                      index === 0
-                        ? "w-32 top-16 -left-8 sm:left-0"
-                        : index === 1
-                        ? "w-36 top-8 -right-16 sm:right-0"
-                        : "w-40 bottom-16 right-8 sm:right-16"
-                    }`}
-                    style={{ borderColor: "#C73D43" }}
-                  >
-                    <span
-                      className="text-2xl font-bold"
-                      style={{ color: "#C73D43" }}
-                    >
-                      {stat.number}
-                    </span>
-                    <span
-                      className="text-sm text-center"
-                      style={{ color: "#666" }}
-                    >
-                      {stat.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+              <motion.div variants={itemVariants}>
+                <FormField
+                  label="Highest Academic Qualification"
+                  name="academicQualification"
+                  type="text"
+                  required
+                  value={formData.academicQualification}
+                  onChange={handleChange}
+                  placeholder="e.g., '+2 Science – GPA 3.1' / 'Bachelor's in BBA – 60%'"
+                />
+              </motion.div>
 
-          {/* Consultation Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white rounded-2xl shadow-xl overflow-hidden max-w-2xl mx-auto"
-            style={{ border: "2px solid #B2ACCE" }}
-          >
-            <div className="p-8 sm:p-10">
-              <h2
-                className="text-3xl font-bold mb-2"
-                style={{ color: "#2C3C81" }}
-              >
-                Free Consultation
-              </h2>
-              <p className="mb-8" style={{ color: "#666" }}>
-                Get expert guidance on your study abroad journey
-              </p>
-
-              <div className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium mb-2"
-                      style={{ color: "#2C3C81" }}
-                    >
-                      Full Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      value={form.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border rounded-lg transition focus:outline-none focus:ring-2"
-                      style={{
-                        borderColor: "#B2ACCE",
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = "#C73D43")}
-                      onBlur={(e) => (e.target.style.borderColor = "#B2ACCE")}
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium mb-2"
-                      style={{ color: "#2C3C81" }}
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border rounded-lg transition focus:outline-none focus:ring-2"
-                      style={{
-                        borderColor: "#B2ACCE",
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = "#C73D43")}
-                      onBlur={(e) => (e.target.style.borderColor = "#B2ACCE")}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium mb-2"
-                    style={{ color: "#2C3C81" }}
-                  >
-                    Phone Number
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border rounded-lg transition focus:outline-none focus:ring-2"
-                    style={{
-                      borderColor: "#B2ACCE",
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = "#C73D43")}
-                    onBlur={(e) => (e.target.style.borderColor = "#B2ACCE")}
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium mb-2"
-                    style={{ color: "#2C3C81" }}
-                  >
-                    Tell us about your study abroad goals (Optional)
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    value={form.message}
-                    onChange={handleChange}
-                    placeholder="Which country are you interested in? What course would you like to pursue?"
-                    className="w-full px-4 py-3 border rounded-lg transition focus:outline-none focus:ring-2"
-                    style={{
-                      borderColor: "#B2ACCE",
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = "#C73D43")}
-                    onBlur={(e) => (e.target.style.borderColor = "#B2ACCE")}
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full text-white py-4 px-6 rounded-lg font-bold text-lg transition transform hover:scale-[1.02] shadow-md disabled:opacity-70"
-                  style={{
-                    backgroundColor: "#C73D43",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.backgroundColor = "#B12B31")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor = "#C73D43")
-                  }
+              <motion.div variants={itemVariants}>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Preferred Study Destination(s) *
+                </label>
+                <motion.div
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+                  variants={containerVariants}
                 >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center">
-                      <svg
-                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
+                  {["UK", "Australia", "Canada", "USA", "New Zealand"].map(
+                    (country) => (
+                      <motion.div
+                        key={country}
+                        className="flex items-center"
+                        variants={itemVariants}
                       >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Processing...
-                    </span>
-                  ) : (
-                    "Request Free Consultation"
+                        <motion.div
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="flex items-center"
+                        >
+                          <input
+                            type="checkbox"
+                            id={`dest-${country}`}
+                            name="studyDestinations"
+                            value={country}
+                            checked={formData.studyDestinations.includes(
+                              country
+                            )}
+                            onChange={handleChange}
+                            className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                          />
+                          <label
+                            htmlFor={`dest-${country}`}
+                            className="ml-2 block text-sm text-gray-700"
+                          >
+                            {country}
+                          </label>
+                        </motion.div>
+                      </motion.div>
+                    )
                   )}
-                </button>
-              </div>
-            </div>
+                </motion.div>
+              </motion.div>
 
-            <div
-              className="p-6 text-center"
-              style={{ backgroundColor: "#F5F4F5" }}
-            >
-              <p style={{ color: "#2C3C81" }}>
-                Ready to start your journey? Call us at{" "}
-                <span className="font-semibold" style={{ color: "#C73D43" }}>
-                  9844162726
-                </span>
-              </p>
+              <motion.div variants={itemVariants}>
+                <FormField
+                  label="Preferred Level of Study"
+                  name="studyLevel"
+                  type="select"
+                  required
+                  value={formData.studyLevel}
+                  onChange={handleChange}
+                  options={["", "Diploma", "Bachelor", "Master", "PhD"]}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <FormField
+                  label="Have you taken any English proficiency tests?"
+                  name="englishTest"
+                  type="select"
+                  required
+                  value={formData.englishTest}
+                  onChange={handleChange}
+                  options={["", "IELTS", "PTE", "TOEFL", "Others", "Not yet"]}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <FormField
+                  label="Do you have a valid passport?"
+                  name="passportStatus"
+                  type="select"
+                  required
+                  value={formData.passportStatus}
+                  onChange={handleChange}
+                  options={["", "Yes", "No", "Applied"]}
+                />
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <label
+                  htmlFor="studyReason"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Why do you want to study abroad? *
+                </label>
+                <motion.textarea
+                  id="studyReason"
+                  name="studyReason"
+                  rows={4}
+                  required
+                  value={formData.studyReason}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  placeholder="Brief reason to understand goals/motivation"
+                  whileFocus={{
+                    scale: 1.01,
+                    boxShadow: "0 0 0 3px rgba(53, 179, 84, 0.2)",
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+
+            <div className="mt-8 flex justify-end">
+              <motion.div
+                className="w-full max-w-xs"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <SubmitButton
+                  isSubmitting={isSubmitting}
+                  label="Submit Application"
+                />
+              </motion.div>
             </div>
           </form>
-        </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          <ContactInfo />
+          <SocialLinks />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-8 bg-white rounded-2xl shadow-xl overflow-hidden"
+        >
+          <div className="h-96 w-full">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.460420998043!2d85.3124665!3d27.6695539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19c0ec8a8459%3A0x1d1f7e8f0e4b0b1f!2sYour%20Location!5e0!3m2!1sen!2snp!4v1620000000000!5m2!1sen!2snp"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </motion.div>
       </div>
-    </main>
+    </div>
   );
 }

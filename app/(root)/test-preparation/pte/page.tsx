@@ -1,4 +1,3 @@
-// app/test-preparation/pte/page.tsx
 "use client";
 
 import { motion, LazyMotion, domAnimation } from "framer-motion";
@@ -11,6 +10,7 @@ import {
   FaBook,
   FaHeadphones,
   FaCheckCircle,
+  FaHeadset,
 } from "react-icons/fa";
 
 export default function PTEPreparation() {
@@ -19,19 +19,19 @@ export default function PTEPreparation() {
       name: "Speaking & Writing",
       duration: "77-93 min",
       tasks: "Personal introduction, read aloud, describe image, essay",
-      icon: <FaRobot className="text-blue-500 text-xl" />,
+      icon: <FaRobot className="text-[#35B354] text-xl" />,
     },
     {
       name: "Reading",
       duration: "32-40 min",
       tasks: "Multiple choice, re-order paragraphs",
-      icon: <FaBook className="text-blue-500 text-xl" />,
+      icon: <FaBook className="text-[#35B354] text-xl" />,
     },
     {
       name: "Listening",
       duration: "45-57 min",
       tasks: "Summarize spoken text, highlight correct summary",
-      icon: <FaHeadphones className="text-blue-500 text-xl" />,
+      icon: <FaHeadphones className="text-[#35B354] text-xl" />,
     },
   ];
 
@@ -64,37 +64,60 @@ export default function PTEPreparation() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen bg-gray-50 pt-30"
       >
-        <div className="max-w-7xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
+        {/* Enhanced Hero Section with Background Image */}
+        <div className="relative py-32 px-4 sm:px-6 lg:px-8 text-white overflow-hidden bg-gradient-to-r from-[#35B354]/90 to-green-800/90">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/pte.jpg" // Your PTE background image
+              alt="PTE Academic Test"
+              fill
+              className="object-cover"
+              priority
+              quality={100}
+            />
+            <div className="absolute inset-0 bg-black/50"></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto relative z-10 text-center">
             <motion.div
-              animate={{
-                scale: [1, 1.05, 1],
-                transition: { duration: 2, repeat: Infinity },
-              }}
-              className="flex justify-center mb-6"
-            >
-              <Image
-                src="/images/pte-logo.png"
-                alt="PTE"
-                width={200}
-                height={100}
-              />
-            </motion.div>
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              className="inline-block mb-8"
+            ></motion.div>
             <motion.h1
               initial={{ y: -20 }}
               animate={{ y: 0 }}
-              className="text-4xl font-extrabold text-gray-900 sm:text-5xl lg:text-6xl mb-4"
+              className="text-4xl font-extrabold sm:text-5xl lg:text-6xl mb-6"
             >
-              PTE Academic Preparation 💻
+              PTE Academic <span className="text-green-200">Preparation</span>
             </motion.h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The fastest computer-based English test with AI scoring
+            <p className="text-xl sm:text-2xl max-w-3xl mx-auto mb-10">
+              Fast, fair, and convenient computer-based English test with AI
+              scoring
             </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-all"
+              >
+                Book Your Test
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-white/10 transition-all"
+              >
+                <FaHeadset className="inline mr-2" /> Free Consultation
+              </motion.button>
+            </div>
           </div>
+        </div>
 
+        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
           {/* Test Advantages */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -110,12 +133,12 @@ export default function PTEPreparation() {
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className="bg-white p-6 rounded-xl shadow-md text-center"
+                className="bg-white p-8 rounded-xl shadow-lg text-center border-t-4 border-[#35B354] hover:shadow-xl transition-all"
               >
                 <div className="flex justify-center mb-4">
-                  <FaLaptop className="text-blue-500 text-2xl" />
+                  <FaLaptop className="text-[#35B354] text-3xl" />
                 </div>
-                <p className="font-medium">{advantage}</p>
+                <p className="font-medium text-lg">{advantage}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -127,12 +150,14 @@ export default function PTEPreparation() {
             viewport={{ once: true }}
             className="bg-white shadow-xl rounded-lg overflow-hidden mb-16"
           >
-            <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-8 text-white">
+            <div className="bg-gradient-to-r from-[#35B354] to-green-700 p-8 text-white">
               <h2 className="text-2xl font-bold mb-2">PTE Test Format</h2>
-              <p>Three-part computer-based test with AI scoring</p>
+              <p className="text-lg">
+                Three-part computer-based test with AI scoring
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
               {sections.map((section, index) => (
                 <motion.div
                   key={index}
@@ -140,15 +165,17 @@ export default function PTEPreparation() {
                   whileInView={{ opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
-                  className="border-l-4 border-blue-500 pl-4 py-4 bg-blue-50 rounded"
+                  whileHover={{ y: -10 }}
+                  className="border-l-4 border-[#35B354] pl-6 py-6 bg-green-50 rounded-lg hover:shadow-md transition-all"
                 >
-                  <div className="flex items-center mb-2">
+                  <div className="flex items-center mb-4">
                     {section.icon}
-                    <h3 className="text-lg font-bold ml-2">{section.name}</h3>
+                    <h3 className="text-xl font-bold ml-3">{section.name}</h3>
                   </div>
-                  <p className="text-sm text-blue-600">{section.duration}</p>
-                  <p className="text-gray-700 mt-1">{section.tasks}</p>
+                  <p className="text-sm text-[#35B354] font-medium">
+                    {section.duration}
+                  </p>
+                  <p className="text-gray-700 mt-2">{section.tasks}</p>
                 </motion.div>
               ))}
             </div>
@@ -161,8 +188,8 @@ export default function PTEPreparation() {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h3 className="text-2xl font-bold text-center mb-8">PTE FAQs</h3>
-            <div className="space-y-4">
+            <h3 className="text-3xl font-bold text-center mb-12">PTE FAQs</h3>
+            <div className="space-y-6 max-w-4xl mx-auto">
               {faqs.map((faq, index) => (
                 <motion.div
                   key={index}
@@ -170,12 +197,12 @@ export default function PTEPreparation() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white p-6 rounded-lg shadow-md"
+                  className="bg-white p-8 rounded-xl shadow-md border-l-4 border-[#35B354]"
                 >
                   <div className="flex items-start">
-                    <FaCheckCircle className="text-blue-500 mt-1 mr-3 flex-shrink-0" />
+                    <FaCheckCircle className="text-[#35B354] mt-1 mr-4 text-xl flex-shrink-0" />
                     <div>
-                      <h4 className="font-bold text-lg text-blue-600 mb-2">
+                      <h4 className="font-bold text-lg text-[#35B354] mb-3">
                         {faq.question}
                       </h4>
                       <p className="text-gray-700">{faq.answer}</p>
@@ -191,26 +218,26 @@ export default function PTEPreparation() {
             initial={{ scale: 0.95 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
-            className="bg-blue-600 rounded-lg p-8 text-white text-center"
+            className="bg-gradient-to-r from-[#35B354] to-green-700 rounded-xl p-12 text-white text-center shadow-xl"
           >
-            <h2 className="text-2xl font-bold mb-4">
-              Master the Computer Format
+            <h2 className="text-3xl font-bold mb-6">
+              Ready to take the PTE Academic?
             </h2>
-            <p className="mb-6 max-w-2xl mx-auto">
-              Our PTE preparation includes AI-scored practice tests
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Get the fastest English test results with our expert preparation
             </p>
-            <div className="flex justify-center space-x-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium"
+                className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-all"
               >
                 Free Demo Test
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-blue-800 text-white px-6 py-3 rounded-lg font-medium"
+                className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-white/10 transition-all"
               >
                 Book Now
               </motion.button>

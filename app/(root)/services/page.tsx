@@ -46,7 +46,7 @@ export default function ServicesPage() {
         "Post-arrival assistance",
       ],
       icon: <GraduationCap size={40} />,
-      color: "from-blue-500 to-blue-600",
+      color: "from-[#35B354] to-[#2E9B4D]",
       duration: "Ongoing Support",
       image:
         "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop",
@@ -65,7 +65,7 @@ export default function ServicesPage() {
         "Flexible online and offline classes",
       ],
       icon: <BookOpen size={40} />,
-      color: "from-green-500 to-green-600",
+      color: "from-[#35B354] to-[#2E9B4D]",
       duration: "6-24 weeks",
       image:
         "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop",
@@ -84,7 +84,7 @@ export default function ServicesPage() {
         "Rejection case handling",
       ],
       icon: <FileText size={40} />,
-      color: "from-purple-500 to-purple-600",
+      color: "from-[#35B354] to-[#2E9B4D]",
       duration: "4-8 weeks",
       image:
         "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=300&fit=crop",
@@ -103,7 +103,7 @@ export default function ServicesPage() {
         "Follow-up and status tracking",
       ],
       icon: <Award size={40} />,
-      color: "from-yellow-500 to-orange-500",
+      color: "from-[#35B354] to-[#2E9B4D]",
       duration: "2-6 weeks",
       image:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
@@ -122,7 +122,7 @@ export default function ServicesPage() {
         "Emergency contact setup",
       ],
       icon: <Plane size={40} />,
-      color: "from-red-500 to-pink-500",
+      color: "from-[#35B354] to-[#2E9B4D]",
       duration: "1-2 weeks",
       image:
         "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=300&fit=crop",
@@ -141,7 +141,7 @@ export default function ServicesPage() {
         "Regular check-ins and counseling",
       ],
       icon: <Users size={40} />,
-      color: "from-indigo-500 to-purple-500",
+      color: "from-[#35B354] to-[#2E9B4D]",
       duration: "First 3 months",
       image:
         "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&h=300&fit=crop",
@@ -170,7 +170,7 @@ export default function ServicesPage() {
   };
 
   return (
-    <div className="min-h-screen pt-32 bg-gradient-to-br from-[#F5F4F5] via-white to-[#B2ACCE]/20">
+    <div className="min-h-screen pt-52 bg-gradient-to-br from-[#F5F4F5] via-white to-[#E8F5E9]">
       <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <motion.div
@@ -179,10 +179,10 @@ export default function ServicesPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-[#2C3C81] mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#35B354] mb-4">
             Our Services
           </h1>
-          <p className="text-lg text-[#2C3C81]/80 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
             Comprehensive support for your international education journey from
             consultation to post-arrival assistance
           </p>
@@ -196,20 +196,20 @@ export default function ServicesPage() {
           className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12"
         >
           <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-            <div className="text-3xl font-bold text-[#C73D43] mb-2">2000+</div>
-            <div className="text-[#2C3C81]/70">Students Served</div>
+            <div className="text-3xl font-bold text-[#35B354] mb-2">2000+</div>
+            <div className="text-gray-600">Students Served</div>
           </div>
           <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-            <div className="text-3xl font-bold text-[#C73D43] mb-2">98%</div>
-            <div className="text-[#2C3C81]/70">Visa Success Rate</div>
+            <div className="text-3xl font-bold text-[#35B354] mb-2">98%</div>
+            <div className="text-gray-600">Visa Success Rate</div>
           </div>
           <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-            <div className="text-3xl font-bold text-[#C73D43] mb-2">5</div>
-            <div className="text-[#2C3C81]/70">Countries</div>
+            <div className="text-3xl font-bold text-[#35B354] mb-2">5</div>
+            <div className="text-gray-600">Countries</div>
           </div>
           <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-            <div className="text-3xl font-bold text-[#C73D43] mb-2">15+</div>
-            <div className="text-[#2C3C81]/70">Years Experience</div>
+            <div className="text-3xl font-bold text-[#35B354] mb-2">15+</div>
+            <div className="text-gray-600">Years Experience</div>
           </div>
         </motion.div>
 
@@ -242,21 +242,21 @@ export default function ServicesPage() {
               </div>
 
               <div className="p-6">
-                <h3 className="text-xl font-bold text-[#2C3C81] mb-2 group-hover:text-[#C73D43] transition-colors">
+                <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-[#35B354] transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-[#2C3C81]/70 mb-4 line-clamp-3">
+                <p className="text-gray-600 mb-4 line-clamp-3">
                   {service.description}
                 </p>
 
-                <div className="flex items-center text-sm text-[#2C3C81]/70 mb-4">
-                  <Clock size={16} className="mr-1 text-[#C73D43]" />
+                <div className="flex items-center text-sm text-gray-500 mb-4">
+                  <Clock size={16} className="mr-1 text-[#35B354]" />
                   {service.duration}
                 </div>
 
                 <Link
                   href="/contact"
-                  className="w-full bg-[#2C3C81] text-white py-2 rounded-lg hover:bg-[#C73D43] transition-colors group flex items-center justify-center"
+                  className="w-full bg-[#35B354] text-white py-2 rounded-lg hover:bg-[#2E9B4D] transition-colors group flex items-center justify-center"
                 >
                   <span>Free Consultation</span>
                   <ArrowRight
@@ -304,7 +304,7 @@ export default function ServicesPage() {
                 </div>
                 <button
                   onClick={() => setSelectedService(null)}
-                  className="absolute top-4 right-4 bg-white/90 hover:bg-white text-[#2C3C81] rounded-full p-2 transition-colors"
+                  className="absolute top-4 right-4 bg-white/90 hover:bg-white text-[#35B354] rounded-full p-2 transition-colors"
                 >
                   ×
                 </button>
@@ -313,23 +313,23 @@ export default function ServicesPage() {
               <div className="p-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div>
-                    <h3 className="text-xl font-bold text-[#2C3C81] mb-4">
+                    <h3 className="text-xl font-bold text-gray-800 mb-4">
                       Service Overview
                     </h3>
-                    <p className="text-[#2C3C81]/70 mb-6">
+                    <p className="text-gray-600 mb-6">
                       {selectedService.description}
                     </p>
 
                     <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="text-center p-4 bg-[#F5F4F5] rounded-lg">
+                      <div className="text-center p-4 bg-gray-50 rounded-lg">
                         <Clock
                           size={24}
-                          className="mx-auto text-[#C73D43] mb-2"
+                          className="mx-auto text-[#35B354] mb-2"
                         />
-                        <div className="font-medium text-[#2C3C81]">
+                        <div className="font-medium text-gray-800">
                           Duration
                         </div>
-                        <div className="text-sm text-[#2C3C81]/70">
+                        <div className="text-sm text-gray-600">
                           {selectedService.duration}
                         </div>
                       </div>
@@ -337,7 +337,7 @@ export default function ServicesPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-bold text-[#2C3C81] mb-4">
+                    <h3 className="text-xl font-bold text-gray-800 mb-4">
                       What's Included
                     </h3>
                     <div className="space-y-3 mb-6">
@@ -345,9 +345,9 @@ export default function ServicesPage() {
                         <div key={index} className="flex items-start">
                           <CheckCircle
                             size={20}
-                            className="text-[#C73D43] mr-3 mt-0.5 flex-shrink-0"
+                            className="text-[#35B354] mr-3 mt-0.5 flex-shrink-0"
                           />
-                          <span className="text-[#2C3C81]/70">{feature}</span>
+                          <span className="text-gray-600">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -357,7 +357,7 @@ export default function ServicesPage() {
                 <div className="flex gap-3 mt-6">
                   <Link
                     href="/contact"
-                    className="flex-1 bg-[#C73D43] text-white py-3 rounded-lg hover:bg-[#2C3C81] transition-colors text-center"
+                    className="flex-1 bg-[#35B354] text-white py-3 rounded-lg hover:bg-[#2E9B4D] transition-colors text-center"
                   >
                     Free Consultation
                   </Link>
@@ -372,7 +372,7 @@ export default function ServicesPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-[#2C3C81] rounded-xl p-8 mt-12 text-center text-white"
+          className="bg-[#35B354] rounded-xl p-8 mt-12 text-center text-white"
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             Ready to Start Your Journey?
@@ -383,7 +383,7 @@ export default function ServicesPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-[#C73D43] text-white px-8 py-3 rounded-lg hover:bg-white hover:text-[#2C3C81] transition-colors font-semibold"
+            className="inline-block bg-white text-[#35B354] px-8 py-3 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
           >
             Book Free Consultation
           </Link>

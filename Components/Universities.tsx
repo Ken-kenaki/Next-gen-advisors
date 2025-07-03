@@ -82,10 +82,10 @@ export default function UniversitiesCarousel() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3C81] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#35B354] mb-4">
             Discover Top Courses and Universities
           </h2>
-          <p className="text-[#2C3C81]/80 text-lg max-w-3xl mx-auto">
+          <p className="text-[#35B354] text-lg max-w-3xl mx-auto">
             Explore our partner institutions across the globe offering
             world-class education and exceptional opportunities for
             international students.
@@ -209,7 +209,7 @@ export default function UniversitiesCarousel() {
         >
           <Link
             href="/universities"
-            className="group inline-flex items-center bg-[#C73D43] text-[#F5F4F5] px-8 py-3 rounded-lg font-semibold hover:bg-[#2C3C81] transition-colors"
+            className="group inline-flex items-center bg-[#35B354] text-[#F5F4F5] px-8 py-3 rounded-lg font-semibold hover:bg-[#2C3C81] transition-colors"
             aria-label="View all universities"
           >
             View All Universities

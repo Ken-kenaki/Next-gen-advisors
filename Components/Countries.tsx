@@ -8,14 +8,13 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Country {
   name: string;
   flag: string;
   image: string;
-  intake: string;
-  programs: string;
-  ranking: string;
+  description: string;
 }
 
 export default function CountriesCarousel() {
@@ -23,54 +22,35 @@ export default function CountriesCarousel() {
 
   const countries: Country[] = [
     {
-      name: "United States",
-      flag: "🇺🇸",
-      image: "/usa.jpg",
-      intake: "Fall: Aug-Sep | Spring: Jan | Summer: May-Jun",
-      programs: "4,000+ institutions offering diverse programs",
-      ranking: "Top universities: Harvard, Stanford, MIT, Caltech, Columbia",
-    },
-    {
-      name: "Malta",
-      flag: "🇲🇹",
-      image: "/malta.jpg",
-      intake: "Fall: October | Spring: February",
-      programs: "English-taught programs at universities and colleges",
-      ranking:
-        "Top institutions: University of Malta, Malta College of Arts, Science & Technology",
-    },
-    {
-      name: "United Kingdom",
+      name: "UK",
       flag: "🇬🇧",
       image: "/uk.jpg",
-      intake: "Fall: Sep-Oct | Spring: Jan (limited programs)",
-      programs: "160+ universities with 50,000+ courses",
-      ranking: "Top universities: Oxford, Cambridge, Imperial, LSE, UCL",
+      description:
+        "Home to world-renowned universities with centuries of academic excellence",
     },
     {
       name: "Australia",
       flag: "🇦🇺",
       image: "/australia.jpg",
-      intake: "Semester 1: February | Semester 2: July",
-      programs: "43 universities with strong research programs",
-      ranking: "Top universities: Melbourne, Sydney, ANU, Queensland, Monash",
+      description: "High-quality education with post-study work opportunities",
     },
     {
-      name: "South Korea",
-      flag: "🇰🇷",
-      image: "/korea.jpg",
-      intake: "Spring: March | Fall: September",
-      programs: "400+ universities with global partnerships",
-      ranking:
-        "Top universities: Seoul National, KAIST, POSTECH, Yonsei, Korea University",
+      name: "Canada",
+      flag: "🇨🇦",
+      image: "/canada.jpg",
+      description: "Welcoming environment with excellent research facilities",
     },
     {
-      name: "Japan",
-      flag: "🇯🇵",
-      image: "/japan.jpg",
-      intake: "Spring: April | Fall: September/October",
-      programs: "800+ universities including national, public and private",
-      ranking: "Top universities: Tokyo, Kyoto, Osaka, Tohoku, Keio",
+      name: "USA",
+      flag: "🇺🇸",
+      image: "/usa.jpg",
+      description: "Diverse programs at top-ranked global institutions",
+    },
+    {
+      name: "New Zealand",
+      flag: "🇳🇿",
+      image: "/new-zealand.jpg",
+      description: "Innovative education in breathtaking natural surroundings",
     },
   ];
 
@@ -79,10 +59,10 @@ export default function CountriesCarousel() {
       <div className="container mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2C3C81] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#35B354] mb-4">
             Explore Study Destinations
           </h2>
-          <p className="text-[#2C3C81]/80 text-lg max-w-3xl mx-auto">
+          <p className="text-[#35B354]/80 text-lg max-w-3xl mx-auto">
             Discover countries offering world-class education and exceptional
             opportunities for international students.
           </p>
@@ -134,30 +114,19 @@ export default function CountriesCarousel() {
                     {/* Hidden Details - Reveals on Hover */}
                     <div className="max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-500">
                       <div className="pt-4 border-t border-[#B2ACCE]/30 space-y-3">
-                        <div className="flex items-center text-white/90">
-                          <span className="text-[#B2ACCE] mr-2">Intake:</span>
-                          {country.intake}
-                        </div>
-                        <div className="flex items-center text-white/90">
-                          <span className="text-[#B2ACCE] mr-2">
-                            Institutions:
-                          </span>
-                          {country.programs}
-                        </div>
-                        <div className="flex items-center text-white/90">
-                          <span className="text-[#B2ACCE] mr-2">
-                            Top Schools:
-                          </span>
-                          {country.ranking}
+                        <div className="text-white/90">
+                          {country.description}
                         </div>
                       </div>
-                      <button
-                        type="button"
+                      <Link
+                        href={`/study-destinations/${country.name
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`}
                         className="mt-4 group flex items-center text-[#B2ACCE] hover:text-white transition-colors"
                       >
                         <span>Explore {country.name}</span>
                         <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -168,13 +137,13 @@ export default function CountriesCarousel() {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <button
-            type="button"
-            className="group inline-flex items-center bg-[#C73D43] text-[#F5F4F5] px-8 py-3 rounded-lg font-semibold hover:bg-[#2C3C81] transition-colors"
+          <Link
+            href="/study-destinations"
+            className="group inline-flex items-center bg-[#35B354] text-[#F5F4F5] px-8 py-3 rounded-lg font-semibold hover:bg-[#2C3C81] transition-colors"
           >
             View All Countries
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

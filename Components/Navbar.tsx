@@ -267,16 +267,6 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-4 xl:gap-6">
-              <motion.div whileHover={{ scale: 1.05 }}>
-                <Link
-                  href="/about"
-                  className="text-gray-700 hover:text-[#35B354] font-medium transition-colors whitespace-nowrap"
-                  aria-label="About us"
-                >
-                  ABOUT US
-                </Link>
-              </motion.div>
-
               {/* Study Destinations Dropdown */}
               <div
                 className="relative"
@@ -400,6 +390,15 @@ export default function Navbar() {
                   )}
                 </AnimatePresence>
               </div>
+              <motion.div whileHover={{ scale: 1.05 }}>
+                <Link
+                  href="/about"
+                  className="text-gray-700 hover:text-[#35B354] font-medium transition-colors whitespace-nowrap"
+                  aria-label="About us"
+                >
+                  ABOUT US
+                </Link>
+              </motion.div>
 
               {/* Our Services Dropdown */}
               <div

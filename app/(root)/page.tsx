@@ -3,12 +3,13 @@ import CareerChoicesSection from "@/Components/CarrierChoicesSection";
 import WhyUs from "@/Components/WhyUs";
 import React from "react";
 import NewsEventsCarousel from "@/Components/NewsEvents";
-import StatsCounter from "@/Components/StatsCounter";
 import UniversitiesCarousel from "@/Components/Universities";
 import StudentSuccessCarousel from "@/Components/StudentSuccess";
 import CountriesCarousel from "@/Components/Countries";
 import AboutSection from "@/Components/About";
 import ContactSection from "@/Components/ContactSection";
+import ConnectWithUs from "@/Components/ConnectWithUs";
+// import FindUs from "@/Components/AboutFindUs";
 // import FindUsSection from "@/Components/FindUs";
 
 export default async function page() {
@@ -20,11 +21,12 @@ export default async function page() {
         <AboutSection />
         <WhyUs />
         <NewsEventsCarousel />
-        <StatsCounter />
         <UniversitiesCarousel />
         <StudentSuccessCarousel />
         <CountriesCarousel />
+        <ConnectWithUs />
         <ContactSection />
+        {/* <FindUs /> */}
         {/* <FindUsSection /> */}
       </div>
     </main>

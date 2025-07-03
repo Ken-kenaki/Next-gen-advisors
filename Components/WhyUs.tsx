@@ -47,31 +47,31 @@ export default function WhyUs() {
 
   const features: FeatureItem[] = [
     {
-      title: "AI-Powered University Matching",
+      title: "Proven Track Record",
       description:
-        "Our proprietary algorithm analyzes your profile against thousands of data points to recommend perfect-fit universities with 92% acceptance rates.",
-      image: "/ai-matching.jpg",
-      badge: "Innovation",
-      buttonText: "Try Our Match Tool",
-      buttonLink: "/match",
+        "Our established history of helping students achieve their academic dreams speaks for itself through countless success stories.",
+      image: "/sucess.jpg",
+      badge: "Trusted",
+      buttonText: "See Success Stories",
+      buttonLink: "#stories",
     },
     {
-      title: "Digital-First Advisory",
+      title: "Personalized Guidance",
       description:
-        "Virtual consultations, real-time document tracking, and 24/7 chatbot support - experience seamless guidance through our Next Gen platform.",
-      image: "/digital-advisory.jpg",
-      badge: "Convenience",
-      buttonText: "Explore Platform",
-      buttonLink: "/platform",
+        "Every student receives one-on-one counseling tailored specifically to their unique goals and aspirations.",
+      image: "/guide.jpg",
+      badge: "Tailored",
+      buttonText: "Meet Our Advisors",
+      buttonLink: "/about",
     },
     {
-      title: "Global Success Network",
+      title: "Comprehensive Support",
       description:
-        "Join 10,000+ alumni across 30 countries who provide insider tips and mentorship through our exclusive student community.",
-      image: "/global-network.jpg",
-      badge: "Community",
-      buttonText: "Meet Our Alumni",
-      buttonLink: "/alumni",
+        "From initial research to final enrollment, we provide complete assistance at every step of your educational journey.",
+      image: "/support.jpg",
+      badge: "Complete",
+      buttonText: "View Our Services",
+      buttonLink: "/services",
     },
   ];
 
@@ -80,14 +80,14 @@ export default function WhyUs() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block bg-[#35B354]/10 text-[#35B354] px-4 py-2 rounded-full text-sm font-medium mb-4">
-            The Next Gen Difference
+            Your Success, Our Priority
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Why Next Gen Advisors?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Transforming international education with technology, transparency,
-            and tailored solutions.
+            We combine expertise with personalized attention to create pathways
+            to academic success.
           </p>
         </div>
 
@@ -134,10 +134,10 @@ export default function WhyUs() {
 
         <div className="mt-16 text-center">
           <Link
-            href="/about"
+            href="/contact"
             className="inline-flex items-center justify-center px-8 py-4 bg-[#35B354] text-white font-semibold rounded-lg hover:bg-[#2a8a43] transition-colors shadow-md hover:shadow-lg"
           >
-            Discover Our Full Approach
+            Begin Your Journey
             <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

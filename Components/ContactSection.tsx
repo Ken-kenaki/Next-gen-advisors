@@ -179,35 +179,6 @@ export default function ContactSection() {
                 ))}
               </div>
             </div>
-
-            {/* Social Media */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="bg-[#35B354]/5 p-6 rounded-xl border border-[#35B354]/10"
-            >
-              <h4 className="text-xl font-bold text-gray-800 mb-4">
-                Connect With Us
-              </h4>
-              <p className="text-gray-600 mb-4">
-                Follow us on social media for updates and study abroad tips.
-              </p>
-              <div className="flex gap-4">
-                {["Facebook", "Instagram", "TikTok"].map((platform, index) => (
-                  <motion.a
-                    key={index}
-                    whileHover={{ y: -2 }}
-                    href="#"
-                    className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-all"
-                  >
-                    <span className="font-medium text-[#35B354]">
-                      {platform}
-                    </span>
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Contact Form */}

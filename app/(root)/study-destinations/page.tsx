@@ -159,7 +159,7 @@ export default function StudyDestinationsPage() {
   };
 
   return (
-    <div className="min-h-screen pt-24 bg-gradient-to-br from-white to-[#f0f7f1]">
+    <div className="min-h-screen pt-48 bg-gradient-to-br from-white to-[#f0f7f1]">
       <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <motion.div

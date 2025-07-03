@@ -82,7 +82,7 @@ export default function Gallery() {
 
   return (
     <main className="overflow-x-hidden">
-      <div className="w-full max-w-[100vw] min-h-screen pt-40 bg-gradient-to-br from-red-50 via-white to-purple-50">
+      <div className="w-full max-w-[100vw] min-h-screen pt-50 bg-gradient-to-br from-red-50 via-white to-purple-50">
         <div className="max-w-7xl mx-auto px-6">
           <header className="text-center mb-8">
             <h1 className="text-5xl font-bold bg-gradient-to-r from-red-600 to-blue-800 bg-clip-text text-transparent mb-4">

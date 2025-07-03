@@ -1,10 +1,17 @@
-// app/test-preparation/gre/page.tsx
 "use client";
 
 import { motion, LazyMotion, domAnimation } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { FaCalculator, FaBook, FaPenFancy, FaChartLine } from "react-icons/fa";
+import {
+  FaCalculator,
+  FaBook,
+  FaPenFancy,
+  FaChartLine,
+  FaHeadset,
+  FaCheckCircle,
+  FaUniversity,
+} from "react-icons/fa";
 
 export default function GREPreparation() {
   const sections = [
@@ -12,19 +19,19 @@ export default function GREPreparation() {
       name: "Verbal Reasoning",
       duration: "Two 30-min sections",
       tasks: "Text completion, reading comprehension",
-      icon: <FaBook className="text-purple-500 text-xl" />,
+      icon: <FaBook className="text-[#35B354] text-2xl" />,
     },
     {
       name: "Quantitative",
       duration: "Two 35-min sections",
       tasks: "Problem solving, data analysis",
-      icon: <FaCalculator className="text-purple-500 text-xl" />,
+      icon: <FaCalculator className="text-[#35B354] text-2xl" />,
     },
     {
       name: "Analytical Writing",
       duration: "60 minutes",
       tasks: "Analyze an issue and argument",
-      icon: <FaPenFancy className="text-purple-500 text-xl" />,
+      icon: <FaPenFancy className="text-[#35B354] text-2xl" />,
     },
   ];
 
@@ -33,6 +40,13 @@ export default function GREPreparation() {
     "Geometry (25%)",
     "Data Analysis (25%)",
     "Arithmetic (15%)",
+  ];
+
+  const verbalSkills = [
+    "Vocabulary Building",
+    "Reading Comprehension",
+    "Text Completion",
+    "Sentence Equivalence",
   ];
 
   const faqs = [
@@ -52,98 +66,225 @@ export default function GREPreparation() {
     },
   ];
 
+  const features = [
+    {
+      title: "Personalized Study Plan",
+      description: "Customized to your strengths and weaknesses",
+      icon: <FaCheckCircle className="text-[#35B354] text-2xl" />,
+    },
+    {
+      title: "Expert Instructors",
+      description: "Experienced GRE tutors with proven results",
+      icon: <FaUniversity className="text-[#35B354] text-2xl" />,
+    },
+    {
+      title: "Full-Length Practice Tests",
+      description: "Simulated GRE testing environment",
+      icon: <FaChartLine className="text-[#35B354] text-2xl" />,
+    },
+    {
+      title: "Score Improvement Guarantee",
+      description: "Or get additional coaching at no extra cost",
+      icon: <FaCheckCircle className="text-[#35B354] text-2xl" />,
+    },
+  ];
+
   return (
     <LazyMotion features={domAnimation}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen bg-gray-50"
       >
-        <div className="max-w-7xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
+        {/* Enhanced Hero Section */}
+        <div className="relative bg-gradient-to-r from-[#35B354] to-green-800 pt-44 pb-22 sm:px-6 lg:px-8 text-white overflow-hidden">
+          <div className="absolute inset-0 opacity-20">
+            <Image
+              src="/images/test-pattern.png"
+              alt="Background pattern"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="max-w-7xl mx-auto relative z-10 text-center">
             <motion.div
-              whileHover={{ scale: 1.1 }}
-              className="flex justify-center mb-6"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              className="inline-block mb-8"
             >
-              <Image
-                src="/images/gre-logo.png"
-                alt="GRE"
-                width={200}
-                height={100}
-              />
+              <FaUniversity className="text-white text-6xl mx-auto" />
             </motion.div>
             <motion.h1
               initial={{ y: -20 }}
               animate={{ y: 0 }}
-              className="text-4xl font-extrabold text-gray-900 sm:text-5xl lg:text-6xl mb-4"
+              className="text-4xl font-extrabold sm:text-5xl lg:text-6xl mb-6"
             >
-              GRE Preparation 🔬
+              Master the <span className="text-green-200">GRE</span>
             </motion.h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Gateway to graduate and business schools worldwide
+            <p className="text-xl sm:text-2xl max-w-3xl mx-auto mb-10">
+              Comprehensive preparation for graduate school admission success
             </p>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block"
+            >
+              <Link
+                href="/apply"
+                className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:bg-gray-100 transition-all"
+              >
+                Start Your Preparation
+              </Link>
+            </motion.div>
           </div>
+        </div>
 
-          {/* Test Structure */}
+        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+          {/* Test Structure Section */}
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="bg-white shadow-xl rounded-lg overflow-hidden mb-16"
+            className="mb-20"
           >
-            <div className="bg-gradient-to-r from-purple-600 to-purple-800 p-8 text-white">
-              <h2 className="text-2xl font-bold mb-2">GRE Test Format</h2>
-              <p>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                GRE Test Structure
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Computer-adaptive test measuring verbal, quantitative, and
                 analytical writing skills
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {sections.map((section, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5 }}
-                  className="border-l-4 border-purple-500 pl-4 py-4 bg-purple-50 rounded"
-                >
-                  <div className="flex items-center mb-2">
-                    {section.icon}
-                    <h3 className="text-lg font-bold ml-2">{section.name}</h3>
-                  </div>
-                  <p className="text-sm text-purple-600">{section.duration}</p>
-                  <p className="text-gray-700 mt-1">{section.tasks}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Quantitative Focus */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="bg-white p-8 rounded-lg shadow-lg mb-12"
-          >
-            <h3 className="text-2xl font-bold mb-6 flex items-center">
-              <FaCalculator className="mr-2 text-purple-500" /> Quantitative
-              Topics
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {quantTopics.map((topic, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-600"
+                  whileHover={{ y: -10 }}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden border-t-4 border-[#35B354] hover:shadow-xl transition-all"
                 >
-                  <p className="font-medium">{topic}</p>
+                  <div className="p-8">
+                    <div className="flex items-center mb-4">
+                      {section.icon}
+                      <h3 className="text-xl font-bold ml-3">{section.name}</h3>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-start">
+                        <FaCheckCircle className="text-[#35B354] mt-1 mr-2 flex-shrink-0" />
+                        <span className="text-gray-700">
+                          {section.duration}
+                        </span>
+                      </div>
+                      <div className="flex items-start">
+                        <FaCheckCircle className="text-[#35B354] mt-1 mr-2 flex-shrink-0" />
+                        <span className="text-gray-700">{section.tasks}</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Quantitative Focus Section */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mb-20"
+          >
+            <div className="bg-white rounded-xl shadow-lg p-8">
+              <div className="flex flex-col md:flex-row gap-8">
+                <div className="md:w-1/2">
+                  <h3 className="text-2xl font-bold mb-6 flex items-center">
+                    <FaCalculator className="mr-3 text-[#35B354] text-3xl" />
+                    Quantitative Section
+                  </h3>
+                  <p className="text-gray-700 mb-6">
+                    The GRE Quantitative Reasoning section measures your ability
+                    to understand, interpret, and analyze quantitative
+                    information and solve problems using mathematical concepts.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {quantTopics.map((topic, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="bg-green-50 p-4 rounded-lg border-l-4 border-[#35B354]"
+                      >
+                        <p className="font-medium">{topic}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+                <div className="md:w-1/2">
+                  <h3 className="text-2xl font-bold mb-6 flex items-center">
+                    <FaBook className="mr-3 text-[#35B354] text-3xl" />
+                    Verbal Section
+                  </h3>
+                  <p className="text-gray-700 mb-6">
+                    The GRE Verbal Reasoning section measures your ability to
+                    analyze and evaluate written material and synthesize
+                    information obtained from it.
+                  </p>
+                  <div className="space-y-4">
+                    {verbalSkills.map((skill, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex items-start"
+                      >
+                        <FaCheckCircle className="text-[#35B354] mt-1 mr-3 flex-shrink-0" />
+                        <span className="text-gray-700">{skill}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Features Section */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mb-20"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Our GRE Program Features
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Everything you need to achieve your target score
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                  className="bg-white p-8 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all"
+                >
+                  <div className="text-[#35B354] mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                  <p className="text-gray-700">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -154,23 +295,31 @@ export default function GREPreparation() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="mb-16"
+            className="mb-20"
           >
-            <h3 className="text-2xl font-bold text-center mb-8">GRE FAQs</h3>
-            <div className="space-y-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Answers to common questions about GRE preparation
+              </p>
+            </div>
+
+            <div className="space-y-6 max-w-4xl mx-auto">
               {faqs.map((faq, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-white p-6 rounded-lg shadow-md"
+                  className="bg-white p-8 rounded-xl shadow-md border-l-4 border-[#35B354]"
                 >
                   <div className="flex items-start">
-                    <FaChartLine className="text-purple-500 mt-1 mr-3 flex-shrink-0" />
+                    <FaChartLine className="text-[#35B354] mt-1 mr-4 text-xl flex-shrink-0" />
                     <div>
-                      <h4 className="font-bold text-lg text-purple-600 mb-2">
+                      <h4 className="font-bold text-lg text-[#35B354] mb-3">
                         {faq.question}
                       </h4>
                       <p className="text-gray-700">{faq.answer}</p>
@@ -181,24 +330,36 @@ export default function GREPreparation() {
             </div>
           </motion.div>
 
-          {/* CTA */}
+          {/* CTA Section */}
           <motion.div
             initial={{ scale: 0.95 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-purple-600 to-purple-800 text-white p-8 rounded-lg text-center"
+            className="bg-gradient-to-r from-[#35B354] to-green-700 text-white p-12 rounded-xl text-center shadow-xl"
           >
-            <h2 className="text-2xl font-bold mb-4">Start Your GRE Journey</h2>
-            <p className="mb-6 max-w-2xl mx-auto">
-              Our 12-week program covers all sections with expert instructors
+            <h2 className="text-3xl font-bold mb-6">
+              Ready to conquer the GRE?
+            </h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Our proven strategies and expert guidance will help you achieve
+              your best possible score
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-purple-700 px-8 py-3 rounded-lg font-bold shadow-lg"
-            >
-              Get Study Plan
-            </motion.button>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-all"
+              >
+                Get Started Today
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-white/10 transition-all"
+              >
+                <FaHeadset className="inline mr-2" /> Speak to an Advisor
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </motion.div>

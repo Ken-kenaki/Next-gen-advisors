@@ -5,12 +5,12 @@ import { ID, Query } from "node-appwrite";
 
 export interface Story {
   $id?: string;
-  name: string; // Changed from title to name
-  program: string; // Changed from author to program
+  name: string;
+  program: string;
   university: string; // New field
   content: string;
   rating: number; // New field (1-5)
-  status: "pending" | "approved" | "rejected"; // Changed from draft/published
+  status: "pending" | "approved" | "rejected";
   imageId?: string;
   createdAt?: string;
   updatedAt?: string;
@@ -70,12 +70,12 @@ export interface University {
 
 export interface Resource {
   $id?: string;
-  fileId: string;
   name: string;
   description?: string;
   type: string;
-  size: number;
-  createdAt: string;
+  size?: number;
+  fileId?: string; // Added to store reference to the actual file
+  createdAt?: string;
 }
 
 export class DatabaseService {
@@ -327,7 +327,19 @@ export class DatabaseService {
     );
   }
 
-  // Resources ----
+  // Resources CRUD
+  static async createResource(data: Omit<Resource, "$id" | "createdAt">) {
+    const { databases } = await this.getClient();
+    return await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.collections.resources,
+      ID.unique(),
+      {
+        ...data,
+        createdAt: new Date().toISOString(),
+      }
+    );
+  }
 
   static async getResources(limit = 50, offset = 0) {
     const { databases } = await this.getClient();
@@ -344,19 +356,6 @@ export class DatabaseService {
       appwriteConfig.databaseId,
       appwriteConfig.collections.resources,
       id
-    );
-  }
-
-  static async createResource(data: Omit<Resource, "$id" | "createdAt">) {
-    const { databases } = await this.getClient();
-    return await databases.createDocument(
-      appwriteConfig.databaseId,
-      appwriteConfig.collections.resources,
-      ID.unique(),
-      {
-        ...data,
-        createdAt: new Date().toISOString(),
-      }
     );
   }
 
@@ -377,5 +376,16 @@ export class DatabaseService {
       appwriteConfig.collections.resources,
       id
     );
+  }
+
+  static async getResourceByFileId(fileId: string) {
+    const { databases } = await this.getClient();
+    const res = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.collections.resources,
+      [Query.equal("fileId", fileId)]
+    );
+
+    return res.documents[0] || null;
   }
 }

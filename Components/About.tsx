@@ -90,7 +90,7 @@ export default function AboutSection() {
             className="relative h-80 sm:h-96 lg:h-full rounded-xl overflow-hidden shadow-xl"
           >
             <Image
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644"
+              src="/connect.jpeg"
               alt="Students studying abroad"
               fill
               className="object-cover"
@@ -166,33 +166,6 @@ export default function AboutSection() {
             </div>
           </motion.div>
         </div>
-
-        {/* Testimonials Placeholder */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="text-center"
-        >
-          <h2 className="text-3xl font-bold text-[#35B354] mb-12">
-            Student Success Stories
-          </h2>
-          <div className="bg-white p-8 rounded-xl shadow-inner border border-[#35B354]/20">
-            <MessageSquare className="w-12 h-12 text-[#35B354] mx-auto mb-6" />
-            <p className="text-gray-600 italic mb-6">
-              "Testimonials from our students will appear here. We're collecting
-              inspiring stories of students who achieved their dreams through
-              our guidance."
-            </p>
-            <div className="flex justify-center space-x-4">
-              {[1, 2, 3].map((item) => (
-                <div
-                  key={item}
-                  className="w-3 h-3 rounded-full bg-[#35B354]/30"
-                />
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
