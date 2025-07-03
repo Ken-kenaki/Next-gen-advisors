@@ -259,8 +259,8 @@ export default function Navbar() {
                 <Image
                   src="/logo.png"
                   alt="Next Gen Advisors"
-                  width={100}
-                  height={100}
+                  width={130}
+                  height={130}
                 />
               </Link>
             </motion.div>
