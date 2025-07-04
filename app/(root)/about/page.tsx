@@ -235,15 +235,6 @@ export default function AboutSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="mb-12">
-            <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-[#35B354]/10 text-[#35B354] mb-4">
-              Student Experiences
-            </span>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
-              Our <span className="text-[#35B354]">Success Stories</span>
-            </h2>
-          </div>
-
           <StudentSuccessCarousel />
         </motion.div>
 

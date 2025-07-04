@@ -232,14 +232,14 @@ export default function PTEPreparation() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-all"
               >
-                Free Demo Test
+                <Link href="texl:015413555">Call Now</Link>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-white/10 transition-all"
               >
-                Book Now
+                <Link href="/apply-online"> Apply Now </Link>
               </motion.button>
             </div>
           </motion.div>

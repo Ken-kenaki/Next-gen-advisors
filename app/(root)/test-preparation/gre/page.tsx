@@ -100,7 +100,7 @@ export default function GREPreparation() {
         <div className="relative bg-gradient-to-r from-[#35B354] to-green-800 pt-44 pb-22 sm:px-6 lg:px-8 text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <Image
-              src="/images/test-pattern.png"
+              src="/gre.jpg"
               alt="Background pattern"
               fill
               className="object-cover"
@@ -130,7 +130,7 @@ export default function GREPreparation() {
               className="inline-block"
             >
               <Link
-                href="/apply"
+                href="/apply-online"
                 className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:bg-gray-100 transition-all"
               >
                 Start Your Preparation
@@ -350,14 +350,15 @@ export default function GREPreparation() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-all"
               >
-                Get Started Today
+                <Link href="apply-online">Get Started Today</Link>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-white/10 transition-all"
               >
-                <FaHeadset className="inline mr-2" /> Speak to an Advisor
+                <FaHeadset className="inline mr-2" />
+                <Link href="tel:015413555">Speak to an Advisor</Link>
               </motion.button>
             </div>
           </motion.div>

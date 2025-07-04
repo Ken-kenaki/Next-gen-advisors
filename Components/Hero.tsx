@@ -200,7 +200,7 @@ export default function HeroSection(): JSX.Element {
 
             <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/apply-now"
+                href="/apply-online"
                 className="group flex items-center justify-center space-x-2 bg-[#35B354] text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-[#2a8e43] hover:shadow-lg transition-all duration-300 shadow-md"
               >
                 <span>BEGIN YOUR APPLICATION</span>

@@ -1,14 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Target,
-  Globe,
-  Users,
-  BookOpen,
-  Heart,
-  MessageSquare,
-} from "lucide-react";
+import { Target, Globe, Users, Heart } from "lucide-react";
 import Image from "next/image";
 
 interface ValueItem {
@@ -18,11 +11,31 @@ interface ValueItem {
 }
 
 export default function AboutSection() {
-  const stats = [
-    { value: "10,000+", label: "Students Guided" },
-    { value: "15+", label: "Countries" },
-    { value: "500+", label: "Universities" },
-    { value: "98%", label: "Success Rate" },
+  const strengths = [
+    {
+      icon: Users,
+      title: "Student Focused",
+      description:
+        "We've successfully guided countless students towards their academic dreams",
+    },
+    {
+      icon: Globe,
+      title: "Global Network",
+      description:
+        "Our extensive partnerships span across numerous countries worldwide",
+    },
+    {
+      icon: Heart,
+      title: "Proven Success",
+      description:
+        "Consistently high approval rates for our students' applications",
+    },
+    {
+      icon: Target,
+      title: "Trusted Experience",
+      description:
+        "Years of dedicated service in the education consultancy field",
+    },
   ];
 
   const values: ValueItem[] = [
@@ -30,19 +43,19 @@ export default function AboutSection() {
       icon: Target,
       title: "Our Vision",
       description:
-        "To empower the next generation by providing access to quality education and global career opportunities.",
+        "To empower the next generation by providing access to quality education and global career opportunities that truly make a difference in their lives.",
     },
     {
       icon: Heart,
       title: "Our Mission",
       description:
-        "To deliver honest, efficient, and personalized guidance that empowers students to make informed decisions.",
+        "To deliver honest, efficient, and personalized guidance that empowers students to make informed decisions, achieve their academic goals, and unlock global opportunities through trusted education consultancy services.",
     },
     {
       icon: Globe,
       title: "Global Reach",
       description:
-        "We help students think globally and prepare them for success in an interconnected world.",
+        "Empowering students to embrace a global mindset and thrive in today's interconnected world.",
     },
   ];
 
@@ -57,17 +70,23 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold text-[#35B354] mb-6">
+            <h2 className="text-3xl font-bold text-[#35B354] mb-6">
+              Who Are We?
+            </h2>
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-6">
               Nextgen Advisors
             </h1>
             <p className="text-lg text-gray-700 mb-8">
-              A premier educational consultancy helping students pursue their
-              dreams of studying abroad. We provide end-to-end guidance, from
-              selecting the right course and university to visa processing and
-              pre-departure preparation.
+              Nextgen Advisors is a premier educational consultancy helping
+              students pursue their dreams of studying abroad. We provide
+              end-to-end guidance, from selecting the right course and
+              university to visa processing and pre-departure preparation. We
+              guide students to the right path by offering expert counseling,
+              personalized support, and access to top international
+              universities.
             </p>
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, index) => (
+              {strengths.map((strength, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0 }}
@@ -75,10 +94,13 @@ export default function AboutSection() {
                   transition={{ delay: index * 0.1 }}
                   className="bg-[#35B354]/10 p-4 rounded-lg"
                 >
-                  <p className="text-2xl font-bold text-[#35B354]">
-                    {stat.value}
-                  </p>
-                  <p className="text-gray-600">{stat.label}</p>
+                  <div className="flex items-center gap-3">
+                    <strength.icon className="w-6 h-6 text-[#35B354]" />
+                    <h3 className="font-bold text-gray-800">
+                      {strength.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 mt-2">{strength.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -158,10 +180,9 @@ export default function AboutSection() {
                 new academic environment.
               </p>
               <p>
-                With partnerships across 15+ countries and relationships with
-                over 500 universities worldwide, we continue to expand
-                opportunities while maintaining the personalized touch that sets
-                us apart.
+                With extensive international partnerships and university
+                relationships worldwide, we continue to expand opportunities
+                while maintaining the personalized touch that sets us apart.
               </p>
             </div>
           </motion.div>

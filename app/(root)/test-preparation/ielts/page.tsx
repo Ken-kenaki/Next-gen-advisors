@@ -203,14 +203,15 @@ export default function IELTSPreparation() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-all"
               >
-                Book Your Test
+                <Link href="/apply-online">Book Your Test</Link>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-white/10 transition-all"
               >
-                <FaHeadset className="inline mr-2" /> Free Consultation
+                <FaHeadset className="inline mr-2" />{" "}
+                <Link href="/contact"> Free Consultation </Link>
               </motion.button>
             </div>
           </div>
@@ -486,7 +487,7 @@ export default function IELTSPreparation() {
                 <div className="mt-8 flex md:mt-0 md:ml-8 space-x-4">
                   <motion.div whileHover={{ scale: 1.05 }}>
                     <Link
-                      href="/apply"
+                      href="/apply-online"
                       className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-[#35B354] bg-white hover:bg-gray-100"
                     >
                       Apply Now
@@ -494,7 +495,7 @@ export default function IELTSPreparation() {
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.05 }}>
                     <a
-                      href="tel:+9771234567890"
+                      href="tel:+015413555"
                       className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-800 hover:bg-green-900"
                     >
                       Call Now

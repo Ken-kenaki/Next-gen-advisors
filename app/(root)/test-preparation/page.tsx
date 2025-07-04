@@ -166,13 +166,13 @@ export default function TestPreparationOverview() {
             className="mt-12 flex flex-col sm:flex-row justify-center gap-6"
           >
             <Link
-              href="/apply"
+              href="/apply-online"
               className="flex items-center justify-center px-10 py-4 border border-transparent text-lg font-bold rounded-lg shadow-lg text-[#35B354] bg-white hover:bg-gray-50 md:py-5 md:text-xl md:px-12 transition-all hover:scale-105 transform"
             >
               Get Started
             </Link>
             <a
-              href="tel:+9771234567890"
+              href="tel:015413555"
               className="flex items-center justify-center px-10 py-4 border-2 border-white text-lg font-bold rounded-lg shadow-lg text-white bg-transparent hover:bg-white/10 md:py-5 md:text-xl md:px-12 transition-all hover:scale-105 transform"
             >
               <FaHeadset className="mr-3" /> Contact Our Experts

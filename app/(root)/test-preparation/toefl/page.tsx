@@ -115,14 +115,15 @@ export default function TOEFLPreparation() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-all"
               >
-                Enroll Now
+                <Link href="/apply-online">Enroll Now</Link>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-white/10 transition-all"
               >
-                <FaHeadset className="inline mr-2" /> Free Consultation
+                <FaHeadset className="inline mr-2" />
+                <Link href="/contact">Free Consultation</Link>
               </motion.button>
             </div>
           </div>
@@ -260,14 +261,14 @@ export default function TOEFLPreparation() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-[#35B354] px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-gray-100 transition-all"
               >
-                Enroll Now
+                <Link href="/apply-online">Enroll Now</Link>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-transparent border-2 border-white px-8 py-4 rounded-lg font-bold shadow-lg hover:bg-white/10 transition-all"
               >
-                Free Demo Class
+                <Link href="texl:015413555">Call Now</Link>
               </motion.button>
             </div>
           </motion.div>
