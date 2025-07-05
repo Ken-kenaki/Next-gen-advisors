@@ -54,7 +54,7 @@ export default function Navbar() {
     },
     { name: "PTE Preparation", route: "/test-preparation/pte", icon: "💻" },
     { name: "GRE/ GMAT", route: "/test-preparation/gre", icon: "🧠" },
-    { name: "TOEFL", route: "/test-preparation/toefl", icon: "🇺🇸" },
+    { name: "TOEFL", route: "/test-preparation/toefl", icon: "📝" },
     { name: "SAT", route: "/test-preparation/sat", icon: "📚" },
   ];
 
@@ -244,7 +244,7 @@ export default function Navbar() {
         className="bg-white shadow-lg fixed lg:top-[40px] top-0 z-40 w-full"
       >
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-3">
+          <div className="flex justify-between items-center">
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -259,8 +259,8 @@ export default function Navbar() {
                 <Image
                   src="/logo.png"
                   alt="Next Gen Advisors"
-                  width={130}
-                  height={130}
+                  width={150}
+                  height={150}
                 />
               </Link>
             </motion.div>

@@ -153,40 +153,6 @@ export default function AboutSection() {
             ))}
           </div>
         </div>
-
-        {/* Story Section */}
-        <div className="bg-[#35B354]/5 rounded-2xl p-8 sm:p-12 mb-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h2 className="text-3xl font-bold text-[#35B354] mb-6">
-              Our Story
-            </h2>
-            <div className="space-y-6 text-gray-700">
-              <p>
-                Founded with a simple mission: to make international education
-                accessible to every deserving student. What started as a small
-                consultancy has grown into Nepal's most trusted education
-                partner.
-              </p>
-              <p>
-                Our team, having experienced the challenges of studying abroad
-                firsthand, understood the need for comprehensive support that
-                goes beyond just application assistance. Today, we provide
-                end-to-end services that ensure our students not only get
-                admitted to their dream universities but also thrive in their
-                new academic environment.
-              </p>
-              <p>
-                With extensive international partnerships and university
-                relationships worldwide, we continue to expand opportunities
-                while maintaining the personalized touch that sets us apart.
-              </p>
-            </div>
-          </motion.div>
-        </div>
       </div>
     </section>
   );

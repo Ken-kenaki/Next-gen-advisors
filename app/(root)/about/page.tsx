@@ -1,11 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Target, Globe, Heart, ChevronRight } from "lucide-react";
+import { Target, Globe, Rocket, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import StudentSuccessCarousel from "@/Components/StudentSuccess";
 import GlimpseThroughImages from "@/Components/Glimpse";
-import ConnectWithUs from "@/Components/ConnectWithUs";
 import FindUs from "@/Components/AboutFindUs";
 
 interface ValueItem {
@@ -30,7 +29,7 @@ export default function AboutSection() {
         "To empower the next generation by providing access to quality education and global career opportunities.",
     },
     {
-      icon: Heart,
+      icon: Rocket,
       title: "Our Mission",
       description:
         "To deliver honest, efficient, and personalized guidance that empowers students to make informed decisions.",
@@ -44,7 +43,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="bg-white pt-45">
+    <section className="bg-white lg:pt-45 pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 items-center pt-16">
@@ -124,7 +123,7 @@ export default function AboutSection() {
         </div>
 
         {/* Values Section */}
-        <div className="text-center mb-16">
+        <div id="values" className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -162,78 +161,13 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* Story Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative bg-gradient-to-r from-[#35B354]/5 to-[#2e9b4a]/5 rounded-3xl p-8 sm:p-12 mb-16 overflow-hidden"
-        >
-          <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-[#35B354]/10 blur-3xl"></div>
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#35B354]/10 blur-3xl"></div>
-
-          <div className="relative max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-[#35B354]/20 text-[#35B354] mb-4">
-                Our Journey
-              </span>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Our <span className="text-[#35B354]">Story</span>
-              </h2>
-            </motion.div>
-
-            <div className="space-y-6 text-gray-700">
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                Founded with a simple mission: to make international education
-                accessible to every deserving student. What started as a small
-                consultancy has grown into Nepal's most trusted education
-                partner.
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                viewport={{ once: true }}
-              >
-                Our team, having experienced the challenges of studying abroad
-                firsthand, understood the need for comprehensive support that
-                goes beyond just application assistance. Today, we provide
-                end-to-end services that ensure our students not only get
-                admitted to their dream universities but also thrive in their
-                new academic environment.
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                viewport={{ once: true }}
-              >
-                With partnerships across multiple countries and relationships
-                with universities worldwide, we continue to expand opportunities
-                while maintaining the personalized touch that sets us apart.
-              </motion.p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Success Stories Section */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-16"
+          id="testimonials"
         >
           <StudentSuccessCarousel />
         </motion.div>

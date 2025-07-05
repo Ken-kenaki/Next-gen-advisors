@@ -199,7 +199,6 @@ export default function StudyDestinationsPage() {
             className="bg-white rounded-xl shadow-md p-4 text-center border-t-4 border-[#35B354]"
           >
             <Globe size={32} className="mx-auto text-[#35B354] mb-2" />
-            <div className="text-xl font-bold text-[#1a3a1e]">5</div>
             <div className="text-[#2a5242]">Countries</div>
           </motion.div>
           <motion.div
@@ -207,7 +206,6 @@ export default function StudyDestinationsPage() {
             className="bg-white rounded-xl shadow-md p-4 text-center border-t-4 border-[#35B354]"
           >
             <GraduationCap size={32} className="mx-auto text-[#35B354] mb-2" />
-            <div className="text-xl font-bold text-[#1a3a1e]">100+</div>
             <div className="text-[#2a5242]">Top Universities</div>
           </motion.div>
           <motion.div
@@ -215,7 +213,6 @@ export default function StudyDestinationsPage() {
             className="bg-white rounded-xl shadow-md p-4 text-center border-t-4 border-[#35B354]"
           >
             <Users size={32} className="mx-auto text-[#35B354] mb-2" />
-            <div className="text-xl font-bold text-[#1a3a1e]">10,000+</div>
             <div className="text-[#2a5242]">Nepali Students</div>
           </motion.div>
           <motion.div
@@ -223,7 +220,6 @@ export default function StudyDestinationsPage() {
             className="bg-white rounded-xl shadow-md p-4 text-center border-t-4 border-[#35B354]"
           >
             <Briefcase size={32} className="mx-auto text-[#35B354] mb-2" />
-            <div className="text-xl font-bold text-[#1a3a1e]">90%</div>
             <div className="text-[#2a5242]">Post-Study Work</div>
           </motion.div>
         </motion.div>

@@ -21,8 +21,8 @@ export default function Footer() {
       icon: <Users size={20} className="text-white mr-2 font-extrabold" />,
       links: [
         { name: "Who We Are", url: "/about" },
-        { name: "Our Vision", url: "/about#vision" },
-        { name: "Our Mission", url: "/about#mission" },
+        { name: "Our Vision", url: "/about#values" },
+        { name: "Our Mission", url: "/about#values" },
         { name: "Testimonials", url: "/about#testimonials" },
       ],
     },
@@ -30,11 +30,11 @@ export default function Footer() {
       title: "Study Destinations",
       icon: <Globe size={20} className="text-white mr-2 font-extrabold" />,
       links: [
-        { name: "United Kingdom", url: "/uk" },
-        { name: "Australia", url: "/australia" },
-        { name: "Canada", url: "/canada" },
-        { name: "USA", url: "/usa" },
-        { name: "New Zealand", url: "/new-zealand" },
+        { name: "United Kingdom", url: "/study-destinations/uk" },
+        { name: "Australia", url: "/study-destinations/australia" },
+        { name: "Canada", url: "/study-destinations/canada" },
+        { name: "USA", url: "/study-destinations/usa" },
+        { name: "New Zealand", url: "/study-destinations/new-zealand" },
       ],
     },
     {
@@ -45,7 +45,7 @@ export default function Footer() {
         { name: "PTE", url: "/test-preparation/pte" },
         { name: "TOEFL", url: "/test-preparation/toefl" },
         { name: "SAT", url: "/test-preparation/sat" },
-        { name: "GRE/GMAT", url: "/test-preparation/gre-gmat" },
+        { name: "GRE/GMAT", url: "/test-preparation/gre" },
       ],
     },
     {
@@ -54,21 +54,22 @@ export default function Footer() {
         <ClipboardList size={20} className="text-white mr-2 font-extrabold" />
       ),
       links: [
-        { name: "Career Counseling", url: "/services/counseling" },
-        { name: "University Selection", url: "/services/university-selection" },
-        { name: "Application Assistance", url: "/services/application" },
-        { name: "Visa Guidance", url: "/services/visa" },
-        { name: "Scholarship Support", url: "/services/scholarships" },
+        { name: "Career Counseling", url: "/services" },
+        { name: "University Selection", url: "/services" },
+        { name: "Application Assistance", url: "/services" },
+        { name: "Visa Guidance", url: "/services" },
+        { name: "Scholarship Support", url: "/services" },
       ],
     },
     {
-      title: "Resources",
+      title: "Explore",
       icon: <FileText size={20} className="text-white mr-2 font-extrabold" />,
       links: [
-        { name: "Events/News", url: "/events" },
+        { name: "Events/News", url: "/events-news" },
         { name: "Blogs", url: "/blog" },
-        { name: "Apply Online", url: "/apply" },
+        { name: "Apply Online", url: "/apply-online" },
         { name: "Contact Us", url: "/contact" },
+        { name: "Resources", url: "/resources" },
       ],
     },
   ];
@@ -123,16 +124,6 @@ export default function Footer() {
     },
     {
       icon: (
-        <Twitter
-          size={24}
-          className="text-white hover:opacity-80 transition font-extrabold"
-        />
-      ),
-      url: "#",
-      label: "Twitter",
-    },
-    {
-      icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -150,9 +141,8 @@ export default function Footer() {
   ];
 
   const legalLinks = [
-    { name: "Privacy Policy", url: "/privacy-policy" },
-    { name: "Terms of Service", url: "/terms" },
-    { name: "Sitemap", url: "/sitemap" },
+    { name: "Privacy Policy", url: "#" },
+    { name: "Terms of Service", url: "/#" },
   ];
 
   return (

@@ -258,10 +258,12 @@ export default function StudyInCanada() {
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Experience <span className="text-[#35B354]">UK Education</span>
+            Experience{" "}
+            <span className="text-[#35B354]">Canadian Education</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Discover what makes UK universities among the best in the world
+            Discover what makes Canadian universities among the best in the
+            world
           </p>
         </div>
 

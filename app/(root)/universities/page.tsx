@@ -211,7 +211,7 @@ export default function UniversitiesPage() {
   }
 
   return (
-    <div className="min-h-screen pt-52 bg-gradient-to-br from-[#F5F7F5] via-white to-[#E8F5E9]">
+    <div className="min-h-screen lg:pt-52 pt-30 bg-gradient-to-br from-[#F5F7F5] via-white to-[#E8F5E9]">
       <div className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <motion.div

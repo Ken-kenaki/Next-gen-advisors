@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { ArrowRight, X, Star, User } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Star,
+  User,
+} from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
@@ -11,7 +17,7 @@ import "swiper/css/pagination";
 
 import { appwriteConfig, getImageUrl } from "@/utils/appwrite";
 
-interface Story {
+interface Testimonial {
   $id: string;
   name: string;
   program: string;
@@ -31,8 +37,8 @@ interface FormData {
   file: File | null;
 }
 
-export default function StudentSuccessCarousel(): JSX.Element {
-  const [stories, setStories] = useState<Story[]>([]);
+export default function StudentTestimonialsCarousel(): JSX.Element {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,14 +51,14 @@ export default function StudentSuccessCarousel(): JSX.Element {
     file: null,
   });
 
-  const STORIES_BUCKET = appwriteConfig.buckets.stories;
+  const TESTIMONIALS_BUCKET = appwriteConfig.buckets.stories;
 
-  const getStoryImageUrl = (imageId?: string) => {
+  const getTestimonialImageUrl = (imageId?: string) => {
     if (!imageId) return null;
-    return getImageUrl(imageId, STORIES_BUCKET, 200, 200);
+    return getImageUrl(imageId, TESTIMONIALS_BUCKET, 200, 200);
   };
 
-  const fetchStories = useCallback(async () => {
+  const fetchTestimonials = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(
@@ -73,18 +79,18 @@ export default function StudentSuccessCarousel(): JSX.Element {
       }
 
       const data = await response.json();
-      setStories(Array.isArray(data?.documents) ? data.documents : []);
+      setTestimonials(Array.isArray(data?.documents) ? data.documents : []);
     } catch (error) {
-      console.error("Fetch Stories Error:", error);
-      setStories([]);
+      console.error("Fetch Testimonials Error:", error);
+      setTestimonials([]);
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchStories();
-  }, [fetchStories]);
+    fetchTestimonials();
+  }, [fetchTestimonials]);
 
   const handleInputChange = useCallback(
     (
@@ -130,7 +136,7 @@ export default function StudentSuccessCarousel(): JSX.Element {
           body: formDataToSend,
         });
 
-        if (!response.ok) throw new Error("Failed to submit story");
+        if (!response.ok) throw new Error("Failed to submit testimonial");
 
         setIsPopupOpen(false);
         setFormData({
@@ -141,15 +147,15 @@ export default function StudentSuccessCarousel(): JSX.Element {
           rating: 5,
           file: null,
         });
-        alert("Thank you! Your story has been submitted for review.");
-        await fetchStories();
+        alert("Thank you! Your testimonial has been submitted for review.");
+        await fetchTestimonials();
       } catch (error) {
-        alert("Failed to submit story. Please try again.");
+        alert("Failed to submit testimonial. Please try again.");
       } finally {
         setIsSubmitting(false);
       }
     },
-    [formData, fetchStories]
+    [formData, fetchTestimonials]
   );
 
   if (loading) {
@@ -157,15 +163,15 @@ export default function StudentSuccessCarousel(): JSX.Element {
       <div className="bg-gray-50 py-16 px-4">
         <div className="max-w-7xl mx-auto text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#35B354] mx-auto" />
-          <p className="mt-4 text-gray-600">Loading success stories...</p>
+          <p className="mt-4 text-gray-600">Loading testimonials...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div id="stories" className="bg-gray-50 py-16 px-4">
-      <div className="max-w-7xl mx-auto">
+    <div id="testimonials" className="bg-gray-50 py-16 px-4">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -175,15 +181,14 @@ export default function StudentSuccessCarousel(): JSX.Element {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Student <span className="text-[#35B354]">Success Stories</span>
+            Student <span className="text-[#35B354]">Testimonials</span>
           </h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Hear from our students who achieved their international education
-            dreams
+            What our students say about their international education journey
           </p>
         </motion.div>
 
-        {/* Carousel */}
+        {/* Testimonial Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -195,55 +200,44 @@ export default function StudentSuccessCarousel(): JSX.Element {
             modules={[Navigation, Pagination]}
             spaceBetween={30}
             slidesPerView={1}
-            breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
+            navigation={{
+              nextEl: ".testimonial-next",
+              prevEl: ".testimonial-prev",
             }}
-            navigation
             pagination={{ clickable: true }}
             className="!pb-12"
           >
-            {stories.map((story, index) => (
-              <SwiperSlide key={story.$id}>
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={testimonial.$id}>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="bg-white p-6 rounded-xl shadow-md h-full flex flex-col border border-gray-100"
+                  className="bg-white p-8 rounded-xl shadow-md flex flex-col items-center text-center border border-gray-100"
                 >
-                  <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 rounded-full overflow-hidden mr-4 bg-gray-200 flex items-center justify-center">
-                      {story.imageId ? (
-                        <img
-                          src={getStoryImageUrl(story.imageId) || ""}
-                          alt={story.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src =
-                              "/placeholder-user.jpg";
-                          }}
-                        />
-                      ) : (
-                        <User className="w-8 h-8 text-gray-400" />
-                      )}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-gray-900">{story.name}</h3>
-                      <p className="text-sm text-gray-600">{story.program}</p>
-                      <p className="text-xs text-gray-500">
-                        {story.university}
-                      </p>
-                    </div>
+                  <div className="w-24 h-24 rounded-full overflow-hidden mb-6 bg-gray-200 flex items-center justify-center">
+                    {testimonial.imageId ? (
+                      <img
+                        src={getTestimonialImageUrl(testimonial.imageId) || ""}
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "/placeholder-user.jpg";
+                        }}
+                      />
+                    ) : (
+                      <User className="w-10 h-10 text-gray-400" />
+                    )}
                   </div>
 
-                  <div className="mb-4 flex">
+                  <div className="mb-6 flex">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-5 h-5 ${
-                          i < story.rating
+                        className={`w-6 h-6 ${
+                          i < testimonial.rating
                             ? "text-[#35B354] fill-current"
                             : "text-gray-300"
                         }`}
@@ -251,16 +245,35 @@ export default function StudentSuccessCarousel(): JSX.Element {
                     ))}
                   </div>
 
-                  <p className="text-gray-700 mb-6 flex-grow line-clamp-4">
-                    &quot;{story.content}&quot;
-                  </p>
+                  <blockquote className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto">
+                    &quot;{testimonial.content}&quot;
+                  </blockquote>
+
+                  <div className="text-center">
+                    <h3 className="font-bold text-gray-900 text-xl">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-gray-600">
+                      {testimonial.program} at {testimonial.university}
+                    </p>
+                  </div>
                 </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* Custom Navigation */}
+          <div className="flex justify-center mt-6 space-x-4">
+            <button className="testimonial-prev p-2 rounded-full bg-white shadow-md hover:bg-gray-100 transition-colors">
+              <ChevronLeft className="w-6 h-6 text-[#35B354]" />
+            </button>
+            <button className="testimonial-next p-2 rounded-full bg-white shadow-md hover:bg-gray-100 transition-colors">
+              <ChevronRight className="w-6 h-6 text-[#35B354]" />
+            </button>
+          </div>
         </motion.div>
 
-        {/* Add Your Story Button */}
+        {/* Add Your Testimonial Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -274,7 +287,7 @@ export default function StudentSuccessCarousel(): JSX.Element {
             onClick={() => setIsPopupOpen(true)}
             className="inline-flex items-center bg-[#35B354] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#2e9b4a] transition-colors shadow-md"
           >
-            Share Your Story
+            Share Your Experience
             <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
           </motion.button>
         </motion.div>
@@ -301,7 +314,7 @@ export default function StudentSuccessCarousel(): JSX.Element {
               </button>
 
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Share Your Success Story
+                Share Your Experience
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -361,7 +374,7 @@ export default function StudentSuccessCarousel(): JSX.Element {
 
                 <div>
                   <label className="block text-gray-700 mb-2 font-medium">
-                    Your Story
+                    Your Testimonial
                   </label>
                   <textarea
                     name="content"
@@ -396,7 +409,7 @@ export default function StudentSuccessCarousel(): JSX.Element {
                   disabled={isSubmitting}
                   className="w-full bg-[#35B354] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#2e9b4a] transition-colors disabled:opacity-50"
                 >
-                  {isSubmitting ? "Submitting..." : "Submit Your Story"}
+                  {isSubmitting ? "Submitting..." : "Submit Your Testimonial"}
                 </button>
               </form>
             </motion.div>
