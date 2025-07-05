@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   title: {
-    default: "Next Gen Advisors",
-    template: "%s | Next Gen Advisors",
+    default: "Nextgen Advisors",
+    template: "%s | Nextgen Advisors",
   },
   description:
     "Your trusted partner for global education opportunities. We guide students to study in Canada, Australia, USA, UK, and New Zealand.",
@@ -26,10 +26,10 @@ export const metadata: Metadata = {
     "IELTS preparation",
     "visa assistance",
   ],
-  authors: [{ name: "Next Gen Advisors" }],
+  authors: [{ name: "Nextgen Advisors" }],
   metadataBase: new URL("https://www.nextgenadvisors.com.np"),
   openGraph: {
-    title: "NextGen Advisors | Study Abroad Consultants",
+    title: "Nextgen Advisors | Study Abroad Consultants",
     description: "Your trusted partner for global education opportunities",
     url: "https://www.nextgenadvisors.com.np",
     siteName: "NextGen Advisors",
