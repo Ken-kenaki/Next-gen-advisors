@@ -173,16 +173,6 @@ export default function LoginPage() {
                 "Login"
               )}
             </motion.button>
-
-            <p className="mt-4 text-xs sm:text-[0.9rem] text-[#6B7280] text-center">
-              Don't have an account?{" "}
-              <Link
-                href="/signup"
-                className="text-[#35B354] font-semibold hover:underline"
-              >
-                Sign up
-              </Link>
-            </p>
           </form>
         </div>
       </div>
