@@ -10,40 +10,38 @@ export const metadata: Metadata = {
   },
   title: {
     default: "Next Gen Advisors",
-    template: "%s | Gurukul Education",
+    template: "%s | Next Gen Advisors",
   },
   description:
-    "Your trusted partner for global education opportunities. We guide students to study in South Korea, Australia, Japan, UK, and more.",
+    "Your trusted partner for global education opportunities. We guide students to study in Canada, Australia, USA, UK, and New Zealand.",
   keywords: [
     "study abroad",
+    "consutancy in kumaripati",
     "education consultancy",
-    "study in South Korea",
+    "study in Canada ",
+    "study in USA",
+    "study in New Zealand",
     "study in Australia",
+    "study in UK",
     "IELTS preparation",
     "visa assistance",
   ],
-  authors: [{ name: "Gurukul Education Foundation" }],
-  metadataBase: new URL("https://www.gurukuleducation.com"),
+  authors: [{ name: "Next Gen Advisors" }],
+  metadataBase: new URL("https://www.nextgenadvisors.com.np"),
   openGraph: {
-    title: "Gurukul Education | Study Abroad Consultants",
+    title: "NextGen Advisors | Study Abroad Consultants",
     description: "Your trusted partner for global education opportunities",
-    url: "https://www.gurukuleducation.com",
-    siteName: "Gurukul Education",
+    url: "https://www.nextgenadvisors.com.np",
+    siteName: "NextGen Advisors",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/logo.png",
         width: 1200,
         height: 630,
       },
     ],
     locale: "en_US",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Gurukul Education | Study Abroad Consultants",
-    description: "Your trusted partner for global education opportunities",
-    images: ["/twitter-image.jpg"],
   },
 };
 
